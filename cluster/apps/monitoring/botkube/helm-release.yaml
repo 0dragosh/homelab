@@ -18,17 +18,18 @@ spec:
       interval: 5m
   values:
     communications:
-      discord:
-        enabled: true
-        token: "${SECRET_BOTKUBE_DISCORD_TOKEN}"
-        botid: "${SECRET_BOTKUBE_DISCORD_BOT_ID}"
-        channel: "${SECRET_BOTKUBE_DISCORD_CHANNEL_ID}"
+      slack: 
+        enabled: true 
+        channel: homelab
+        token: "${SECRET_BOTKUBE_SLACK_TOKEN}"
+        botid: "${SECRET_BOTKUBE_SLACK_BOT_ID}"
+        channel: "${SECRET_BOTKUBE_SLACK_CHANNEL}"
     serviceMonitor:
       enabled: true
     config:
       recommendations: false
       settings:
-        clustername: home-cluster
+        clustername: homelab
       resources:
       - name: v1/services
         namespaces:

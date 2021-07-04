@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sync-nfs
+spec:
+  storageClassName: sync
+  capacity:
+    storage: 400Gi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 10.250.1.100
+    path: /storage/sync
+  mountOptions:
+  - nfsvers=3
+  - tcp
+  - intr
+  - hard
+  - noatime
+  - nodiratime
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sync-nfs
+  namespace: media
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: sync
+  resources:
+    requests:
+      storage: 400Gi

@@ -39,7 +39,7 @@ spec:
         - name: bgp_enable
           value: "true"
         - name: bgp_routerinterface
-          value: "eno1"
+          value: "ens1"
         - name: bgp_as
           value: "64512"
         - name: bgp_peeraddress

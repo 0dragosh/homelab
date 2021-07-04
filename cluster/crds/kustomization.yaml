@@ -5,5 +5,4 @@ resources:
 - external-dns
 - external-snapshotter
 - kube-prometheus-stack
-- rook-ceph
 - traefik

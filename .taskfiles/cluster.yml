@@ -11,7 +11,7 @@ tasks:
   kubeconfig:
     desc: Remotely fetch kubeconfig from k3s
     cmds:
-    - rsync --verbose --progress --partial --rsync-path="sudo rsync" {{.K3S_PRIMARY_MASTER_NODE_USERNAME}}@{{.K3S_PRIMARY_MASTER_NODE_ADDRESS}}:/etc/rancher/k3s/k3s.yaml ./kubeconfig
-    - sed -i '' 's/127.0.0.1/{{.K3S_KUBEVIP_ADDRESS}}/g' ./kubeconfig
+    - rsync --verbose --progress --partial --rsync-path="sudo rsync"  -e "ssh -i $HOME/.ssh/dragos" {{.K3S_PRIMARY_MASTER_NODE_USERNAME}}@{{.K3S_PRIMARY_MASTER_NODE_ADDRESS}}:/etc/rancher/k3s/k3s.yaml ./kubeconfig
+    - sed -i 's/127.0.0.1/{{.K3S_KUBEVIP_ADDRESS}}/g' ./kubeconfig
     - chmod go-r kubeconfig
     silent: true

@@ -1,5 +1,6 @@
 # Editors
 .vscode/
+.idea/
 # Trash
 .DS_Store
 Thumbs.db
@@ -18,4 +19,5 @@ xanmanning.k3s*
 node_modules
 # Sops
 .decrypted~*.yaml
+.dec~*.yaml
 kubeconfig

@@ -11,5 +11,5 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
-  storageClassName: rook-ceph-block
+      storage: 15Gi
+  storageClassName: longhorn

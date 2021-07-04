@@ -22,23 +22,22 @@ spec:
       tag: 1.25.0
     env:
       TZ: "Europe/Bucharest"
-      LOG_LEVEL: "info"
     ingress:
       main:
+        primary: true
         enabled: true
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          external-dns/is-public: "true"
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          # traefik.ingress.kubernetes.io/router.middlewares: "networking-basic-auth@kubernetescrd"
         hosts:
-        - host: "requests.${SECRET_DOMAIN}"
+        - host: "overseerr.${SECRET_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
         tls:
         - hosts:
-          - "requests.${SECRET_DOMAIN}"
+          - "overseerr.${SECRET_DOMAIN}"
     persistence:
       config:
         enabled: true

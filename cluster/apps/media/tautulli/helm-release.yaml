@@ -22,6 +22,8 @@ spec:
       tag: v2.7.4
     env:
       TZ: "Europe/Bucharest"
+    podSecurityContext:
+      fsGroup: 568
     ingress:
       main:
         enabled: true
