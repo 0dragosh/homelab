@@ -1,0 +1,8 @@
+---
+
+# Timezone for the servers
+timezone: "Europe/Bucharest"
+
+# Additional ssh public keys to add to the nodes
+ssh_authorized_keys:
+- "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKoDQb1X5iokI0peKQilSxdYSsYvo+6F42linlZdFiuf dragos"

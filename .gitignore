@@ -1,0 +1,21 @@
+# Editors
+.vscode/
+# Trash
+.DS_Store
+Thumbs.db
+# Binaries
+bin
+/flux
+*.iso
+# Temp folders
+.temp*
+.private/
+.logs/
+.task/
+# Ansible
+server/ansible/inventory/e2e/hosts.yml
+xanmanning.k3s*
+node_modules
+# Sops
+.decrypted~*.yaml
+kubeconfig

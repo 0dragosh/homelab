@@ -1,0 +1,11 @@
+---
+
+# IP address of node
+ansible_host: "10.250.1.102"
+
+# Ansible user to ssh into servers with
+ansible_user: "runtime"
+ansible_ssh_private_key_file: ~/.ssh/dragos
+# ansible_ssh_pass: "ubuntu"
+# ansible_ssh_common_args: "-o UserKnownHostsFile=/dev/null"
+ansible_become_pass: "ubuntu"

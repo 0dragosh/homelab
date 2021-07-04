@@ -1,0 +1,17 @@
+---
+version: '3'
+
+vars:
+  PROJECT_DIR:
+    sh: "git rev-parse --show-toplevel"
+  CLUSTER_DIR: "{{.PROJECT_DIR}}/cluster"
+  ANSIBLE_DIR: "{{.PROJECT_DIR}}/ansible"
+
+env:
+  KUBECONFIG: "{{.PROJECT_DIR}}/kubeconfig"
+
+includes:
+  ansible: .taskfiles/ansible.yml
+#  blocky: .taskfiles/blocky.yml
+  cluster: .taskfiles/cluster.yml
+#  flux: .taskfiles/flux.yml
