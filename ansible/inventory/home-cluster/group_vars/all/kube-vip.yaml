@@ -1,0 +1,8 @@
+---
+
+kubevip_interface: ens1
+kubevip_address: 10.250.14.200
+
+kubevip_bgp_peer_ip: 10.250.0.1
+kubevip_bgp_as_number: 64512
+kubevip_bgp_peer_as_number: 64500

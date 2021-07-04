@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- _pvc
+- _external_svc
+- bazarr
+- dizquetv
+- nzbget
+- overseerr
+#- plex
+- prowlarr
+#- qbittorrent
+- radarr
+- readarr
+- resilio
+- sonarr
+- tautulli

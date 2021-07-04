@@ -1,0 +1,32 @@
+---
+
+# see https://github.com/PyratLabs/ansible-role-k3s#globalcluster-variables
+
+k3s_release_version: "v1.21.2+k3s1"
+
+# system-upgrade-controller requires hard links
+k3s_install_hard_links: true
+
+k3s_become_for_all: true
+k3s_debug: false
+
+# Enabled embedded etcd
+k3s_etcd_datastore: true
+k3s_use_unsupported_config: true
+
+# Control Plane registration address - what nodes use to reach the control plane
+# set to kube-vip/keepalived IP
+k3s_registration_address: 10.250.14.200
+
+#
+# Uncomment the config below on new installations
+# Comment after install and run `task ansible:purge-manifests`
+
+# Custom manifest files
+k3s_server_manifests_templates:
+- "kube-vip/kube-vip-rbac.yaml.j2"
+- "kube-vip/kube-vip-daemonset.yaml.j2"
+
+#k3s_server_manifests_urls:
+#- url: https://my.yaml
+#  filename: my.yaml
