@@ -25,12 +25,12 @@ Install Flux into your cluster
 ```sh
 set -x GITHUB_TOKEN xyz;
 flux bootstrap github \
---version=v0.12.1 \
---owner=onedr0p \
---repository=home-cluster \
+--version=v0.16.0 \
+--owner=0dragosh \
+--repository=homelab-k3s \
 --path=cluster/base \
 --personal \
---private=false \
+--private=true \
 --network-policy=false
 ```
 
