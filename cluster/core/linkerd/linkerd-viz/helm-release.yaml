@@ -3,8 +3,10 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: linkerd-viz
-  namespace: networking
+  namespace: linkerd
 spec:
+  dependsOn:
+    - name: linkerd
   interval: 5m
   chart:
     spec:
