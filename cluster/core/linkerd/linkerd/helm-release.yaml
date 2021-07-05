@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: linkerd
-  namespace: networking
+  namespace: linkerd
 spec:
   interval: 5m
   chart:
@@ -15,43 +15,22 @@ spec:
         name: linkerd-charts
         namespace: flux-system
       interval: 5m
+  valuesFrom:
+    - kind: Secret
+      name: linkerd-certs
+      valuesKey: ca.crt
+      targetPath: global.identityTrustAnchorsPEM
+    - kind: Secret
+      name: linkerd-certs
+      valuesKey: issuer.crt
+      targetPath: identity.issuer.tls.crtPEM
+    - kind: Secret
+      name: linkerd-certs
+      valuesKey: issuer.key
+      targetPath: identity.issuer.tls.keyPEM
   values:
     enablePodAntiAffinity: true
+    installNamespace: false
     identity:
       issuer:
-        clockSkewAllowance: 20s
-        crtExpiry: "2022-06-16T05:24:07Z"
-        issuanceLifetime: 24h0m0s
-        scheme: linkerd.io/tls
-        tls:
-          crtPEM: |-
-            -----BEGIN CERTIFICATE-----
-            MIIBsTCCAVigAwIBAgIQbUlmmd+bVA6SqLFY23dNcTAKBggqhkjOPQQDAjAlMSMw
-            IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAeFw0yMTA2MTYwNTIy
-            NDVaFw0yMjA2MTYwNTIyNDVaMCkxJzAlBgNVBAMTHmlkZW50aXR5LmxpbmtlcmQu
-            Y2x1c3Rlci5sb2NhbDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC+fHddNluQ3
-            yDNlnnTvugAT0GGi8aUoyDrsb0EN9nYlSiNer+WXwJZ7PeywcQzi/LVsOcgSDK3S
-            IJKheZufBfOjZjBkMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEA
-            MB0GA1UdDgQWBBRpYwl4a4EEU981rYF6TWN7BF1nsjAfBgNVHSMEGDAWgBSP40Tk
-            rVTDdvay1KgBbakDLDEY0TAKBggqhkjOPQQDAgNHADBEAiAaOzcapWK5TVx2thN6
-            EHn5H1J9w3rniF3/+WolepE1CgIgQnDtlcOBwKgY2PKjssCvzbj2F5hoskLiD5qA
-            cOYcows=
-            -----END CERTIFICATE-----
-          keyPEM: |-
-            -----BEGIN EC PRIVATE KEY-----
-            MHcCAQEEICiKzHqJU12kaHRItB3HnCgDSzvsfPtLWL2UE1HFkCV/oAoGCCqGSM49
-            AwEHoUQDQgAEL58d102W5DfIM2WedO+6ABPQYaLxpSjIOuxvQQ32diVKI16v5ZfA
-            lns97LBxDOL8tWw5yBIMrdIgkqF5m58F8w==
-            -----END EC PRIVATE KEY-----
-    identityTrustAnchorsPEM: |-
-      -----BEGIN CERTIFICATE-----
-      MIIBjTCCATOgAwIBAgIQHIig7rdVibzjO8zGIbg6VTAKBggqhkjOPQQDAjAlMSMw
-      IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAeFw0yMTA2MTYwNTIy
-      MzdaFw0zMTA2MTQwNTIyMzdaMCUxIzAhBgNVBAMTGnJvb3QubGlua2VyZC5jbHVz
-      dGVyLmxvY2FsMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5rrP4o4KoE2Kntbo
-      0+hQF7y86WMnXfVVInkfPVlcZPvOcQD5m33myP56zhdlfRThjo87v8z4MRqGevAI
-      cuODMqNFMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYD
-      VR0OBBYEFI/jROStVMN29rLUqAFtqQMsMRjRMAoGCCqGSM49BAMCA0gAMEUCIQCL
-      mwnQJ+FeVxwbN/TvhMlYTrv0fCP6eB6BZEfGwB3u0QIgDF5G0FxcrAnI+iB8G28p
-      uu34d+XXDZJfmAua/g283DI=
-      -----END CERTIFICATE-----
+        crtExpiry: "2021-10-20T10:29:51Z"

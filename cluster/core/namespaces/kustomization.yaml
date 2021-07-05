@@ -11,3 +11,4 @@ resources:
 - monitoring.yaml
 - networking.yaml
 - velero.yaml
+- linkerd.yaml
