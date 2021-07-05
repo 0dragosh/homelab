@@ -13,6 +13,6 @@ spec:
     - dns01:
         cloudflare:
           email: "${SECRET_EMAIL_CLOUDFLARE}"
-          apiKeySecretRef:
+          apiTokenSecretRef:
             name: cloudflare-token-secret
             key: cloudflare-token
