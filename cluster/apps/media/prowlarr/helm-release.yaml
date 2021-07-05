@@ -2,15 +2,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: readarr
+  name: prowlarr
   namespace: media
 spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: readarr
-      version: 5.2.0
+      chart: prowlarr
+      version: 3.2.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -18,8 +17,8 @@ spec:
       interval: 5m
   values:
     image:
-      repository: ghcr.io/k8s-at-home/readarr
-      tag: v0.1.0.736
+      repository: ghcr.io/k8s-at-home/prowlarr
+      tag: v0.1.0.575
     env:
       TZ: "Europe/Bucharest"
     ingress:
@@ -31,33 +30,28 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
         hosts:
-        - host: "readarr.${SECRET_DOMAIN}"
+        - host: "prowlarr.${SECRET_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
         tls:
         - hosts:
-          - "readarr.${SECRET_DOMAIN}"
+          - "prowlarr.${SECRET_DOMAIN}"
 
     podSecurityContext:
       fsGroup: 568
     persistence:
       config:
         enabled: true
-        existingClaim: readarr-config-v1
-      media:
-        enabled: true
-        existingClaim: media-nfs
-        mountPath: /media
+        existingClaim: bazarr-config-v1
     resources:
       requests:
         memory: 250Mi
         cpu: 500m
       limits:
-        memory: 1500Mi
-    prometheus:
-      podMonitor:
-        enabled: true
-        interval: 10m
-        scrapeTimeout: 2m
-
+        cpu: 3000m
+        memory: 16Gi
+      volumeMounts:
+      - name: config
+        mountPath: /config
+        readOnly: true

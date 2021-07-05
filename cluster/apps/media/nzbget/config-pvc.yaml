@@ -15,6 +15,26 @@ spec:
   storageClassName: longhorn
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nzbget-config-v1
+spec:
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+      staleReplicaTimeout: '30'
+    volumeHandle: "${LONGHORN_NZBGET_CONFIG_PV_NAME}"
+  storageClassName: longhorn
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nzbget-downloads-v1
@@ -27,4 +47,24 @@ spec:
   resources:
     requests:
       storage: 200Gi
+  storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nzbget-downloads-v1
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+      staleReplicaTimeout: '30'
+    volumeHandle: "${LONGHORN_NZBGET_DOWNLOADS_PV_NAME}"
   storageClassName: longhorn

@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: unifi-poller
       version: 8.0.0
       sourceRef:
@@ -23,7 +22,7 @@ spec:
     env:
       TZ: "Europe/Bucharest"
       UP_UNIFI_DEFAULT_ROLE: "homelab-controller"
-      UP_UNIFI_DEFAULT_URL: "http://unifi.home"
+      UP_UNIFI_DEFAULT_URL: "http://10.250.15.217"
       UP_UNIFI_DEFAULT_VERIFY_SSL: false
       UP_UNIFI_DEFAULT_USER: "unifipoller"
       UP_UNIFI_DEFAULT_PASS: "unifipoller"

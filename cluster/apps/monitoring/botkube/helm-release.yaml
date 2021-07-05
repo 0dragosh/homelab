@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://infracloudio.github.io/charts
       chart: botkube
       version: v0.12.1
       sourceRef:
@@ -20,7 +19,6 @@ spec:
     communications:
       slack: 
         enabled: true 
-        channel: homelab
         token: "${SECRET_BOTKUBE_SLACK_TOKEN}"
         botid: "${SECRET_BOTKUBE_SLACK_BOT_ID}"
         channel: "${SECRET_BOTKUBE_SLACK_CHANNEL}"

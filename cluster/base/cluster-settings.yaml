@@ -6,6 +6,7 @@ metadata:
   name: cluster-settings
 data:
   GATEWAY_ADDRESS: "10.250.0.1"
+  STORAGE_ADDRESS: "10.250.1.100"
   KUBE_VIP_ADDRESS: "10.250.14.200"
   KUBE_VIP_INTERFACE: "ens1"
   SVC_ADGUARD_ADDRESS: "10.250.14.111"

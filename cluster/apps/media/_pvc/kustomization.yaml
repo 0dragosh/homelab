@@ -2,4 +2,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- nfs-media-rocinante.yaml
+- qbittorrent_external_svc_ingress.yaml
+- sync-nfs.yaml

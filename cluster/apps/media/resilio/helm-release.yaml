@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: resilio-sync
       version: 4.0.0
       sourceRef:
@@ -29,7 +28,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          # traefik.ingress.kubernetes.io/router.middlewares: "networking-basic-auth@kubernetescrd"
+          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
         hosts:
         - host: "resilio.${SECRET_DOMAIN}"
           paths:
