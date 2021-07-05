@@ -30,7 +30,7 @@ spec:
       uu34d+XXDZJfmAua/g283DI=
       -----END CERTIFICATE-----
 
-    controllerReplicas: 3
+#    controllerReplicas: 3
 
     identity:
       issuer:
