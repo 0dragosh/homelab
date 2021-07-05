@@ -21,14 +21,32 @@ spec:
       defaultDataPath: "/longhorn"
       defaultDataLocality: "best-effort"
       backupTarget: "nfs://10.250.1.100:/storage/backups/longhorn"
-      defaultReplicaCount: 2
+      defaultReplicaCount: 1
       volumeAttachmentRecoveryPolicy: immediate
       nodeDownPodDeletionPolicy: delete-deployment-pod
+
     persistence:
       defaultClass: true
-      defaultClassReplicaCount: 2
+      defaultClassReplicaCount: 1
       defaultDataLocality: "best-effort"
       defaultClassDataLocality: "best-effort"
+      reclaimPolicy: Retain
+      recurringJobs:
+        enable: false
+        jobList: '[
+          {
+            "name":"snap",
+            "task":"snapshot",
+            "cron":"30 * * * *",
+            "retain":10
+          },
+          {
+            "name":"backup",
+            "task":"backup",
+            "cron":"0 * * * *",
+            "retain":10
+          }
+        ]'
     csi:
       # kubeletRootDir: /var/snap/microk8s/common/var/lib/kubelet
       kubeletRootDir: /var/lib/kubelet
