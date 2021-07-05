@@ -4,7 +4,6 @@ resources:
 - cert-manager.yaml
 - flux-system.yaml
 - home.yaml
-- linkerd.yaml
 - longhorn-system.yaml
 - metallb-system.yaml
 - kube-system.yaml
