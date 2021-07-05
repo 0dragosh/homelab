@@ -7,7 +7,6 @@ metadata:
 spec:
   dependsOn:
     - name: linkerd
-      namespace: networking
   interval: 5m
   chart:
     spec:
