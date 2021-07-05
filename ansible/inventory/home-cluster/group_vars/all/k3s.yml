@@ -35,12 +35,12 @@ k3s_registration_address: 10.250.14.200
 #
 
 # Custom manifest files
-#k3s_server_manifests_templates:
+k3s_server_manifests_templates:
+- "kube-vip/kube-vip-rbac.yaml.j2"
+- "kube-vip/kube-vip-daemonset.yaml.j2"
 #- "calico/calico-installation.yaml.j2"
 #- "calico/calico-bgpconfiguration.yaml.j2"
 #- "calico/calico-bgppeer.yaml.j2"
-#- "kube-vip/kube-vip-rbac.yaml.j2"
-#- "kube-vip/kube-vip-daemonset.yaml.j2"
 
 # Custom manifest URLs
 #k3s_server_manifests_urls:
