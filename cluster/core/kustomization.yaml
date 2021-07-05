@@ -6,5 +6,5 @@ resources:
 - kube-system
 - system-upgrade
 - linkerd
-#- longhorn
+- longhorn
 - metallb
