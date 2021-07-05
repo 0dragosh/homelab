@@ -11,3 +11,17 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: home-assistant-config-v1
+spec:
+  claimRef:
+    namespace: home
+    name: home-assistant-config-v1
+  storageClassName: longhorn
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce

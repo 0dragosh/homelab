@@ -2,6 +2,7 @@ apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
   name: hass
+  namespace: home
 spec:
   endpoints:
     - dnsName: "hass.${SECRET_DOMAIN}"

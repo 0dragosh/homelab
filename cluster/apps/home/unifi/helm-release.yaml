@@ -42,7 +42,7 @@ spec:
         annotations:
           ingress.kubernetes.io/protocol: https
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
         hosts:
         - host: "unifi.${SECRET_DOMAIN}"
           paths:
