@@ -22,6 +22,7 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
+      loadBalancerIP: "${SVC_TRAEFIK_ADDRESS}"
       spec:
         externalIPs:
         - "${SVC_TRAEFIK_ADDRESS}"
