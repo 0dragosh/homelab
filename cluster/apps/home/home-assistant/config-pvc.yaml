@@ -30,5 +30,5 @@ spec:
     volumeAttributes:
       numberOfReplicas: "1"
       staleReplicaTimeout: '30'
-    volumeHandle: pvc-b4fbc0dc-6b01-41a6-b3e0-81fa9205188d # must match volume name from Longhorn
+    volumeHandle: pvc-b7636e75-f7b6-4d1d-a1d7-755877681315 # must match volume name from Longhorn
   storageClassName: longhorn
