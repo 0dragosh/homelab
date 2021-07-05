@@ -16,6 +16,8 @@ spec:
         name: jetstack-charts
         namespace: flux-system
   values:
+    # reject pods without proxy where applicable
+    webhookFailurePolicy: Fail
     installCRDs: false
     webhook:
       enabled: true
