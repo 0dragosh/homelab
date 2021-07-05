@@ -70,7 +70,6 @@ spec:
         sniStrict: true
     pilot:
       enabled: true
-      token: "722c9e7d-0103-42a8-82fd-9bb46868c5c4"
     experimental:
       plugins:
         enabled: true

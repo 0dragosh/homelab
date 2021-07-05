@@ -2,15 +2,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: home-assistant
+  name: unifi
   namespace: home
 spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: home-assistant
-      version: 9.2.0
+      chart: unifi
+      version: 2.0.4
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -18,37 +17,40 @@ spec:
       interval: 5m
   values:
     image:
-      repository: ghcr.io/home-assistant/home-assistant
-      tag: 2021.6.6
-    env:
-      TZ: "Europe/Bucharest"
-    # envFrom:
-    # - secretRef:
-    #     name: home-assistant
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
-    service:
-      main:
-        type: LoadBalancer
-        externalIPs:
-        - "${SVC_HOME_ASSISTANT_ADDRESS}"
-        externalTrafficPolicy: Local
+      repository: jacobalberty/unifi
+      tag: v6.2.26
+    podSecurityContext:
+      fsGroup: 2000
+    timezone: Europe/Bucharest
+
+    controllerService:
+      enabled: true
+      type: LoadBalancer
+      loadBalancerIP: 10.250.14.217
+    guiService:
+      enabled: true
+      type: LoadBalancer
+      loadBalancerIP: 10.250.14.218
+    stunService:
+      enabled: true
+      type: LoadBalancer
+      loadBalancerIP: 10.250.14.219
     ingress:
       main:
         enabled: true
         ingressClassName: "traefik"
         annotations:
+          ingress.kubernetes.io/protocol: https
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          external-dns/is-public: "true"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
-        - host: "hass.${SECRET_DOMAIN}"
+        - host: "unifi.${SECRET_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
         tls:
         - hosts:
-          - "hass.${SECRET_DOMAIN}"
+          - "unifi.${SECRET_DOMAIN}"
     probes:
       liveness:
         enabled: false
@@ -57,15 +59,14 @@ spec:
       startup:
         enabled: false
     persistence:
-      config:
-        enabled: true
-        existingClaim: home-assistant-config-v1
-        volumeMounts:
-        - name: config
-          mountPath: /config
+      enabled: true
+      accessMode: ReadWriteOnce
+      existingClaim: unifi-config-v1
+    jvmMaxHeapSize: 8192M
     resources:
+      limits:
+        cpu: 2000m
+        memory: 8Gi
       requests:
         cpu: 100m
-        memory: 100Mi
-      limits:
-        memory: 4000Mi
+        memory: 128Mi
