@@ -22,11 +22,9 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
-      loadBalancerIP: "${SVC_TRAEFIK_ADDRESS}"
       spec:
         externalIPs:
         - "${SVC_TRAEFIK_ADDRESS}"
-        externalTrafficPolicy: Local
       annotations:
         external-dns.alpha.kubernetes.io/hostname: "traefik.${SECRET_DOMAIN}"
     logs:
