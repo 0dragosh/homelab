@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: longhorn-system
+  namespace: flux-system
   name: pv-longhorn-volume-association-names
 data:
   LONGHORN_ADGUARD_PV_NAME: "pvc-738a62f8-46e3-46c0-a5b6-9b542b010a87"
