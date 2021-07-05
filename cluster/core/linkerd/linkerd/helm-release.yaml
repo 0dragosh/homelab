@@ -24,7 +24,7 @@ spec:
         issuanceLifetime: 24h0m0s
         scheme: linkerd.io/tls
         tls:
-          crtPEM: |
+          crtPEM: |-
             -----BEGIN CERTIFICATE-----
             MIIBsTCCAVigAwIBAgIQbUlmmd+bVA6SqLFY23dNcTAKBggqhkjOPQQDAjAlMSMw
             IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAeFw0yMTA2MTYwNTIy
@@ -43,7 +43,7 @@ spec:
             AwEHoUQDQgAEL58d102W5DfIM2WedO+6ABPQYaLxpSjIOuxvQQ32diVKI16v5ZfA
             lns97LBxDOL8tWw5yBIMrdIgkqF5m58F8w==
             -----END EC PRIVATE KEY-----
-    identityTrustAnchorsPEM: |
+    identityTrustAnchorsPEM: |-
       -----BEGIN CERTIFICATE-----
       MIIBjTCCATOgAwIBAgIQHIig7rdVibzjO8zGIbg6VTAKBggqhkjOPQQDAjAlMSMw
       IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAeFw0yMTA2MTYwNTIy
