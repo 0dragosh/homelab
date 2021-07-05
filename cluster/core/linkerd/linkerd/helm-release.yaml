@@ -19,7 +19,7 @@ spec:
     - kind: Secret
       name: linkerd-certs
       valuesKey: ca.crt
-      targetPath: global.identityTrustAnchorsPEM
+      targetPath: identityTrustAnchorsPEM
     - kind: Secret
       name: linkerd-certs
       valuesKey: issuer.crt
