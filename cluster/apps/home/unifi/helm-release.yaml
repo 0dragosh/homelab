@@ -36,21 +36,20 @@ spec:
       type: LoadBalancer
       loadBalancerIP: 10.250.14.219
     ingress:
-      main:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          ingress.kubernetes.io/protocol: https
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
-        hosts:
-        - host: "unifi.${SECRET_DOMAIN}"
-          paths:
-          - path: /
-            pathType: Prefix
-        tls:
-        - hosts:
-          - "unifi.${SECRET_DOMAIN}"
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        ingress.kubernetes.io/protocol: https
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+      hosts:
+      - host: "unifi.${SECRET_DOMAIN}"
+        paths:
+        - path: /
+          pathType: Prefix
+      tls:
+      - hosts:
+        - "unifi.${SECRET_DOMAIN}"
     probes:
       liveness:
         enabled: false
