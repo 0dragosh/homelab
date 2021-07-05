@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://helm.traefik.io/traefik
       chart: traefik
       version: 9.19.2
       sourceRef:
@@ -42,7 +41,7 @@ spec:
       fallbackApiVersion: v1
     ingressRoute:
       dashboard:
-        enabled: false
+        enabled: true
     globalArguments:
     - "--serverstransport.insecureskipverify=true"
     - "--providers.kubernetesingress.ingressclass=traefik"
