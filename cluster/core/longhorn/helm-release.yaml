@@ -59,6 +59,9 @@ spec:
       enabled: true
       ingressClassName: traefik
       host: "longhorn.${SECRET_DOMAIN}"
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
 
       ## Set this to true in order to enable TLS on the ingress record
       ## A side effect of this will be that the backend service will be connected at port 443
