@@ -18,11 +18,17 @@ kind: PersistentVolume
 metadata:
   name: home-assistant-config-v1
 spec:
-  claimRef:
-    namespace: home
-    name: home-assistant-config-v1
-  storageClassName: longhorn
   capacity:
     storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+      staleReplicaTimeout: '30'
+    volumeHandle: pvc-b4fbc0dc-6b01-41a6-b3e0-81fa9205188d # must match volume name from Longhorn
+  storageClassName: longhorn
