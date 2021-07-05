@@ -14,5 +14,5 @@ resources:
 - radarr
 - readarr
 - resilio
-#- sonarr
+- sonarr
 - tautulli
