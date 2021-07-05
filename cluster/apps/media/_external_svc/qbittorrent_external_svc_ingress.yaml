@@ -32,7 +32,7 @@ metadata:
   name: qbittorrent
   namespace: media
 spec:
-  ingressName: "traefik"
+  ingressClassName: "traefik"
   rules:
     - host: "qbittorrent.${SECRET_DOMAIN}"
       http:
