@@ -46,6 +46,7 @@ spec:
       enabled: true
       ingressClassName: "traefik"
       annotations:
+        kubernetes.io/ingress.class: "traefik"
         ingress.kubernetes.io/protocol: https
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
