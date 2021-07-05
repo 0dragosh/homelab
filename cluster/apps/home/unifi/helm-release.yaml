@@ -33,15 +33,15 @@ spec:
     controllerService:
       enabled: true
       type: LoadBalancer
-      loadBalancerIP: 10.250.14.217
+      loadBalancerIP: 10.250.14.117
     guiService:
       enabled: true
       type: LoadBalancer
-      loadBalancerIP: 10.250.14.218
+      loadBalancerIP: 10.250.14.118
     stunService:
       enabled: true
       type: LoadBalancer
-      loadBalancerIP: 10.250.14.219
+      loadBalancerIP: 10.250.14.119
     ingress:
       enabled: true
       ingressClassName: "traefik"
