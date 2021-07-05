@@ -6,7 +6,7 @@ resources:
 - _external_svc
 - bazarr
 - dizquetv
-#- nzbget
+- nzbget
 - overseerr
 #- plex
 - prowlarr
