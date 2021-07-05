@@ -50,10 +50,8 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
       hosts:
-      - host: "unifi.${SECRET_DOMAIN}"
-        paths:
-        - path: /
-          pathType: Prefix
+        - "unifi.${SECRET_DOMAIN}"
+      path: /
       tls:
       - hosts:
         - "unifi.${SECRET_DOMAIN}"
