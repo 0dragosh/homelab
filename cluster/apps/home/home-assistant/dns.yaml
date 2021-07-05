@@ -1,0 +1,11 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: hass
+spec:
+  endpoints:
+    - dnsName: "hass.${SECRET_DOMAIN}"
+      recordTTL: 180
+      recordType: A
+      targets:
+        - "${SVC_TRAEFIK_ADDRESS}"
