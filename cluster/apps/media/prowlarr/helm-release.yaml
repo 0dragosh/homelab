@@ -51,7 +51,4 @@ spec:
       limits:
         cpu: 3000m
         memory: 16Gi
-      volumeMounts:
-      - name: config
-        mountPath: /config
-        readOnly: true
+
