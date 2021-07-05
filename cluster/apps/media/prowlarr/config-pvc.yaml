@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: bazarr-config-v1
+  name: prowlarr-config-v1
   namespace: media
   labels:
     kasten.io/backup-volume: "true"
@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: bazarr-config-v1
+  name: prowlarr-config-v1
 spec:
   capacity:
     storage: 1Gi
@@ -31,5 +31,5 @@ spec:
     volumeAttributes:
       numberOfReplicas: "1"
       staleReplicaTimeout: '30'
-    volumeHandle: "${LONGHORN_BAZARR_PV_NAME}"
+    volumeHandle: "${LONGHORN_PROWLARR_PV_NAME}"
   storageClassName: longhorn
