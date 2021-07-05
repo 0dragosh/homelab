@@ -33,7 +33,7 @@ metadata:
   namespace: media
 spec:
   rules:
-    - host: "qbittorrent.${SVC_TRAEFIK_ADDRESS}"
+    - host: "qbittorrent.${SECRET_DOMAIN}"
       http:
         paths:
           - backend:
@@ -45,4 +45,4 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - "qbittorrent.${SVC_TRAEFIK_ADDRESS}"
+        - "qbittorrent.${SECRET_DOMAIN}"
