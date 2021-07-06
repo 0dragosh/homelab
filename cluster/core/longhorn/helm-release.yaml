@@ -21,13 +21,13 @@ spec:
       defaultDataPath: "/longhorn"
       defaultDataLocality: "best-effort"
       backupTarget: "nfs://10.250.1.100:/storage/backups/longhorn"
-      defaultReplicaCount: 1
+      defaultReplicaCount: 2
       volumeAttachmentRecoveryPolicy: immediate
       nodeDownPodDeletionPolicy: delete-deployment-pod
 
     persistence:
       defaultClass: true
-      defaultClassReplicaCount: 1
+      defaultClassReplicaCount: 2
       defaultDataLocality: "best-effort"
       defaultClassDataLocality: "best-effort"
       reclaimPolicy: Retain
