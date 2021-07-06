@@ -11,6 +11,7 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: longhorn
+  volumeName: unifi-config-v1
 ---
 apiVersion: v1
 kind: PersistentVolume

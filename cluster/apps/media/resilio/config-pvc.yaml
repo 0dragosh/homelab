@@ -13,6 +13,7 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: longhorn
+  volumeName: resilio-config-v1
 ---
 apiVersion: v1
 kind: PersistentVolume

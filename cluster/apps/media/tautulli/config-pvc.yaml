@@ -13,6 +13,7 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: longhorn
+  volumeName: tautulli-config-v1
 ---
 apiVersion: v1
 kind: PersistentVolume

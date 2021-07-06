@@ -13,6 +13,7 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: longhorn
+  volumeName: readarr-config-v1
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -31,5 +32,5 @@ spec:
     volumeAttributes:
       numberOfReplicas: "1"
       staleReplicaTimeout: '30'
-    volumeHandle: "${LONGHORN_HASS_PV_NAME}"
+    volumeHandle: "${LONGHORN_READARR_PV_NAME}"
   storageClassName: longhorn
