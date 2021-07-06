@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
   name: pv-longhorn-volume-association-names
 data:
-  LONGHORN_ADGUARD_PV_NAME: "pvc-738a62f8-46e3-46c0-a5b6-9b542b010a87"
+  LONGHORN_ADGUARD_PV_NAME: "pvc-e11e755e-6774-468e-aba1-38fbbf4b2d7d"
   LONGHORN_BAZARR_PV_NAME: "pvc-08a6b648-d765-45be-a8dd-e5f2d5f516ce"
   LONGHORN_DIZQUETV_PV_NAME: "pvc-d5cc12c9-b9a8-4bcf-b2ed-c62693d9739b"
   LONGHORN_HASS_PV_NAME: "pvc-b7636e75-f7b6-4d1d-a1d7-755877681315"
