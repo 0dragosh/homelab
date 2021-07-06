@@ -31,5 +31,5 @@ spec:
     volumeAttributes:
       numberOfReplicas: "1"
       staleReplicaTimeout: '30'
-    volumeHandle: "${LONGHORN_PROWLARR_PV_NAME}"
+    volumeHandle: "${LONGHORN_OVERSEERR_PV_NAME}"
   storageClassName: longhorn
