@@ -5,6 +5,7 @@ resources:
 - _pvc
 - _external_svc
 - bazarr
+- botdarr
 - dizquetv
 - nzbget
 - overseerr

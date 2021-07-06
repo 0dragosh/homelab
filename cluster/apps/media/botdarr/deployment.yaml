@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: botdarr
+    app.kubernetes.io/name: botdarr
+  name: botdarr
+  namespace: media
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: botdarr
+      app.kubernetes.io/name: botdarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: botdarr
+        app.kubernetes.io/name: botdarr
+    spec:
+      containers:
+        - env:
+            - name: SLACK_CHANNELS
+              value: "${SECRET_BOTDARR_SLACK_CHANNELS}"
+            - name: SLACK_BOT_TOKEN
+              value: "${SECRET_BOTDARR_SLACK_BOT_TOKEN}"
+            - name: SLACK_USER_TOKEN
+              value: "${SECRET_BOTDARR_SLACK_USER_TOKEN}"
+            - name: RADARR_URL
+              value: "http://radarr:7878"
+            - name: RADARR_TOKEN
+              value: "${SECRET_RADARR_API_KEY}"
+            - name: RADARR_PATH
+              value: "/media/movies"
+            - name: SONARR_URL
+              value: "http://sonarr:8989"
+            - name: SONARR_TOKEN
+              value: "${SECRET_SONARR_API_KEY}"
+            - name: SONARR_PATH
+              value: "/media/tv"
+          image: shayaantx/botdarr:5.1.10
+          imagePullPolicy: IfNotPresent
+          name: botdarr
+          resources:
+            limits:
+              memory: 1500Mi
+            requests:
+              cpu: 500m
+              memory: 250Mi
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /media
+              name: media
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 568
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: botdarr-config-v1
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-nfs
