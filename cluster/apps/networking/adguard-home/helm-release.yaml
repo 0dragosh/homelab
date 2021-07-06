@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: adguard
-  namespace: home
+  namespace: networking
 spec:
   interval: 5m
   chart:
@@ -25,7 +25,7 @@ spec:
       dns-udp:
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: 10.250.14.111
+        loadBalancerIP: "${SVC_ADGUARD_ADDRESS}"
         externalTrafficPolicy: Local
     config: |
       bind_host: 0.0.0.0

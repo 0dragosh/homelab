@@ -6,3 +6,4 @@ resources:
 - traefik
 - traefik-forward-auth
 - wildcard-certificate
+- adguard-home
