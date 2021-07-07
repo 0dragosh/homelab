@@ -8,7 +8,7 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: metallb
       version: 2.4.3
       sourceRef:
