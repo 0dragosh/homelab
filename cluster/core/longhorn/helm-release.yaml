@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.longhorn.io
       chart: longhorn
-      version: 1.1.1
+      version: 1.1.2
       sourceRef:
         kind: HelmRepository
         name: longhorn-charts
@@ -24,7 +24,6 @@ spec:
       defaultReplicaCount: 2
       volumeAttachmentRecoveryPolicy: immediate
       nodeDownPodDeletionPolicy: delete-deployment-pod
-
     persistence:
       defaultClass: true
       defaultClassReplicaCount: 2
@@ -69,4 +68,3 @@ spec:
 
       ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
       tlsSecret: "longhorn-${SECRET_DOMAIN}"
-
