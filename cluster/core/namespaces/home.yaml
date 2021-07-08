@@ -4,4 +4,4 @@ kind: Namespace
 metadata:
   name: home
   annotations:
-    linkerd.io/inject: disabled
+    linkerd.io/inject: enabled
