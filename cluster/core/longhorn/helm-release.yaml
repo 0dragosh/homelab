@@ -31,21 +31,8 @@ spec:
       defaultClassDataLocality: "best-effort"
       reclaimPolicy: Retain
       recurringJobs:
-        enable: false
-        jobList: '[
-          {
-            "name":"snap",
-            "task":"snapshot",
-            "cron":"30 * * * *",
-            "retain":10
-          },
-          {
-            "name":"backup",
-            "task":"backup",
-            "cron":"0 * * * *",
-            "retain":10
-          }
-        ]'
+        enable: true
+        jobList: '[{"name":"snap","task":"snapshot","cron":"30 * * * *","retain":10},{"name":"backup","task":"backup","cron":"0 * * * *","retain":10}]'
     csi:
       # kubeletRootDir: /var/snap/microk8s/common/var/lib/kubelet
       kubeletRootDir: /var/lib/kubelet
