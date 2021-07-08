@@ -39,19 +39,18 @@ spec:
         - hosts:
           - "dizquetv.${SECRET_DOMAIN}"
     additionalVolumeMounts:
-      - name: quicksync
-        mountPath: /dev/dri
+    - name: quicksync
+      mountPath: /dev/dri
     additionalVolumes:
-      - name: quicksync
-        hostPath:
-          path: /dev/dri
-
+    - name: quicksync
+      hostPath:
+        path: /dev/dri
     podSecurityContext:
       fsGroup: 568
     persistence:
       config:
         enabled: true
-        existingClaim: dizquetv-config-v1
+        existingClaim: dizquetv-config-v2
     resources:
       limits:
         cpu: 10000m

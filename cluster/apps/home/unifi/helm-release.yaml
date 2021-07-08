@@ -30,7 +30,6 @@ spec:
     podSecurityContext:
       fsGroup: 2000
     timezone: Europe/Bucharest
-
     controllerService:
       enabled: true
       type: LoadBalancer
@@ -55,8 +54,8 @@ spec:
         - "unifi.${SECRET_DOMAIN}"
       path: /
       tls:
-      - hosts:
-        - "unifi.${SECRET_DOMAIN}"
+        - hosts:
+            - "unifi.${SECRET_DOMAIN}"
     probes:
       liveness:
         enabled: false
@@ -67,7 +66,7 @@ spec:
     persistence:
       enabled: true
       accessMode: ReadWriteOnce
-      existingClaim: unifi-config-v1
+      existingClaim: unifi-config-v2
     jvmMaxHeapSize: 8192M
     resources:
       limits:

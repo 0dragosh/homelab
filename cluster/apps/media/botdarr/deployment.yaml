@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -67,7 +68,7 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: botdarr-config-v1
+            claimName: botdarr-config-v2
         - name: media
           persistentVolumeClaim:
             claimName: media-nfs

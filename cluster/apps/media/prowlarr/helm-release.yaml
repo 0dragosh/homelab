@@ -38,13 +38,12 @@ spec:
         tls:
         - hosts:
           - "prowlarr.${SECRET_DOMAIN}"
-
     podSecurityContext:
       fsGroup: 568
     persistence:
       config:
         enabled: true
-        existingClaim: prowlarr-config-v1
+        existingClaim: prowlarr-config-v2
     resources:
       requests:
         memory: 250Mi
@@ -52,4 +51,3 @@ spec:
       limits:
         cpu: 3000m
         memory: 16Gi
-
