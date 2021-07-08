@@ -32,3 +32,16 @@ spec:
       staleReplicaTimeout: '30'
     volumeHandle: "${LONGHORN_RESILIO_PV_NAME}"
   storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: resilio-config-v2
+  namespace: media
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 15Gi
+  storageClassName: longhorn
