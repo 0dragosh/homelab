@@ -24,13 +24,13 @@ spec:
     storage: 1Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: driver.longhorn.io
     fsType: ext4
     volumeAttributes:
-      numberOfReplicas: "1"
+      numberOfReplicas: "2"
       staleReplicaTimeout: '30'
     volumeHandle: "${LONGHORN_OVERSEERR_PV_NAME}"
   storageClassName: longhorn
