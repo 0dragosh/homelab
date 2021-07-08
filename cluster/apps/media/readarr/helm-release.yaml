@@ -44,7 +44,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: readarr-config-v1
+        existingClaim: readarr-config-v2
       media:
         enabled: true
         existingClaim: media-nfs
