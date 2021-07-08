@@ -28,7 +28,7 @@ spec:
     driver: driver.longhorn.io
     fsType: ext4
     volumeAttributes:
-      numberOfReplicas: "2"
+      numberOfReplicas: "1"
       staleReplicaTimeout: '30'
     volumeHandle: "${LONGHORN_NZBGET_CONFIG_PV_NAME}"
   storageClassName: longhorn
@@ -62,7 +62,7 @@ spec:
     driver: driver.longhorn.io
     fsType: ext4
     volumeAttributes:
-      numberOfReplicas: "2"
+      numberOfReplicas: "1"
       staleReplicaTimeout: '30'
     volumeHandle: "${LONGHORN_NZBGET_DOWNLOADS_PV_NAME}"
   storageClassName: longhorn
