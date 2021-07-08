@@ -30,7 +30,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth@kubernetescrd
+          # traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth@kubernetescrd
         hosts:
         - host: "readarr.${SECRET_DOMAIN}"
           paths:
@@ -39,7 +39,6 @@ spec:
         tls:
         - hosts:
           - "readarr.${SECRET_DOMAIN}"
-
     podSecurityContext:
       fsGroup: 568
     persistence:
@@ -61,4 +60,3 @@ spec:
         enabled: true
         interval: 10m
         scrapeTimeout: 2m
-

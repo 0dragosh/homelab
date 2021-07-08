@@ -4,8 +4,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: dizquetv-config-v1
   namespace: media
-  labels:
-    kasten.io/backup-volume: "true"
 spec:
   accessModes:
   - ReadWriteOnce
