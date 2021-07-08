@@ -32,3 +32,16 @@ spec:
       staleReplicaTimeout: '30'
     volumeHandle: "${LONGHORN_ADGUARD_PV_NAME}"
   storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: adguard-config-v2
+  namespace: networking
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: longhorn

@@ -32,3 +32,16 @@ spec:
       staleReplicaTimeout: '30'
     volumeHandle: "${LONGHORN_HASS_PV_NAME}"
   storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: home-assistant-config-v2
+  namespace: home
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: longhorn
