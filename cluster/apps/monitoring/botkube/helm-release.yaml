@@ -18,17 +18,40 @@ spec:
       interval: 5m
   values:
     communications:
-      slack: 
-        enabled: true 
+      slack:
+        enabled: true
         token: "${SECRET_BOTKUBE_SLACK_TOKEN}"
         botid: "${SECRET_BOTKUBE_SLACK_BOT_ID}"
-        channel: "${SECRET_BOTKUBE_SLACK_CHANNEL}"
+        channel: "${SECRET_BOTKUBE_SLACK_CHANNEL_ID}"
     serviceMonitor:
       enabled: true
     config:
       recommendations: false
       settings:
         clustername: homelab
+        kubectl:
+          enabled: true
+          commands:
+            verbs:
+            - api-resources
+            - api-versions
+            - cluster-info
+            - describe
+            - diff
+            - explain
+            - get
+            - logs
+            - top
+            resources:
+            - deployments
+            - pods
+            - ingress
+            - namespaces
+            - daemonsets
+            - statefulsets
+            - storageclasses
+            - nodes
+          defaultNamespace: media
       resources:
       - name: v1/services
         namespaces:
@@ -71,7 +94,7 @@ spec:
         - update
         - delete
         - error
-      - name: networking.k8s.io/v1beta1/ingresses
+      - name: networking.k8s.io/v1/ingresses
         namespaces:
           include:
           - default
