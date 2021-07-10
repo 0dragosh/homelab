@@ -20,5 +20,5 @@ spec:
       interval: 5m
   values:
     dashboard:
-      enforcedHostRegexp: "(.*.drago.sh|localhost.*|127.0.0.1.*)"
+      enforcedHostRegexp: "(.*.${SECRET_DOMAIN}|localhost.*|127.0.0.1.*)"
     enablePodAntiAffinity: true
