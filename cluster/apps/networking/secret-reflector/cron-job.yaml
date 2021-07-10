@@ -4,6 +4,8 @@ kind: CronJob
 metadata:
   name: secret-reflector
   namespace: networking
+  annotations:
+    linkerd.io/inject: disabled
 spec:
   schedule: "0 */12 * * *"
   jobTemplate:
