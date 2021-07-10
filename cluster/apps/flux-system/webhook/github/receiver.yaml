@@ -15,8 +15,11 @@ spec:
   - kind: GitRepository
     name: flux-system
   - kind: Kustomization
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
     name: apps
   - kind: Kustomization
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
     name: core
   - kind: Kustomization
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
     name: crds
