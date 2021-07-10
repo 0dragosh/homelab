@@ -29,7 +29,7 @@ resource "cloudflare_access_policy" "policy" {
   zone_id        = var.zone_id
   application_id = each.value.id
 
-  name           = "allow cloudpush"
+  name           = "allow ${var.email_domain}"
   precedence     = "1"
   decision       = "allow"
 
