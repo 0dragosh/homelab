@@ -151,11 +151,10 @@ spec:
               resources:
                 requests:
                   storage: 50Gi
-        # additionalScrapeConfigs:
-        # - job_name: 'node-exporter'
-        #   honor_timestamps: true
-        #   static_configs:
-        #   - targets:
-        #     # rocinante nas
-        #     - 10.250.1.100:9100
-
+#      additionalScrapeConfigs:
+#      - job_name: 'node-exporter'
+#        honor_timestamps: true
+#        static_configs:
+#        - targets:
+#        # rocinante nas
+#          - 10.250.1.100:9100
