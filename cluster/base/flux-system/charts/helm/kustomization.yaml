@@ -8,6 +8,7 @@ resources:
 - coredns-charts.yaml
 - deliveryhero-charts.yaml
 - grafana-charts.yaml
+- hashicorp-charts.yaml
 - infracloudio-charts.yaml
 - ingress-nginx-charts.yaml
 - jetstack-charts.yaml

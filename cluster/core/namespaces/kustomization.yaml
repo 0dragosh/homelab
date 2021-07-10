@@ -13,3 +13,4 @@ resources:
 - networking.yaml
 - velero.yaml
 - linkerd.yaml
+- terraform.yaml

@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: terraform
+  namespace: terraform
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: terraform
+      version: 1.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: terraform-charts
+        namespace: terraform
+      interval: 5m
+  values:
+    syncWorkspace:
+      terraformRC:
+        secretName: terraformrc
+        secretKey: credentials
