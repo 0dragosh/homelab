@@ -79,7 +79,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - traefik
+                - traefik-public
             topologyKey: kubernetes.io/hostname
     resources:
       requests:
