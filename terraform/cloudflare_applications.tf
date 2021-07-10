@@ -1,12 +1,19 @@
 locals {
   apps = [
-    "sonarr",
+    "bazarr",
+    "grafana",
+    "nzbget",
+    "plex-requests",
+    "prowlarr",
     "radarr",
+    "readarr",
+    "sonarr",
+    "tautulli",
   ]
 }
 
 resource "cloudflare_access_application" "app" {
-  for_each = {for i, app in local.apps:  i => app}
+  for_each = {for app in local.apps:  app => app}
 
   zone_id                   = var.zone_id
   name                      = each.value
@@ -17,7 +24,7 @@ resource "cloudflare_access_application" "app" {
 }
 
 resource "cloudflare_access_policy" "policy" {
-  for_each = {for i, app in cloudflare_access_application.app:  i => app}
+  for_each = {for app in cloudflare_access_application.app:  app => app}
 
   zone_id        = var.zone_id
   application_id = each.value.id

@@ -5,6 +5,5 @@ resources:
 - external-dns
 - secret-reflector
 - traefik
-- traefik-forward-auth
 - wildcard-certificate
 - adguard-home

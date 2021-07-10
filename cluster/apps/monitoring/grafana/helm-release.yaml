@@ -122,10 +122,11 @@ spec:
       enabled: true
     ingress:
       enabled: true
-      ingressClassName: "traefik"
+      ingressClassName: "traefik-public"
       annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+        kubernetes.io/ingress.class: "traefik-public"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       hosts:
       - "grafana.${SECRET_DOMAIN}"
       tls:
