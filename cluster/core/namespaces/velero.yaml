@@ -4,4 +4,4 @@ kind: Namespace
 metadata:
   name: velero
   annotations:
-    linkerd.io/inject: disabled
+    linkerd.io/inject: enabled
