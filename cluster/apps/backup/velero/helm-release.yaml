@@ -44,7 +44,7 @@ spec:
     schedules:
       backup-all:
         disabled: false
-        schedule: "32 20 * * *"
+        schedule: "0 16 * * *"
         useOwnerReferencesInBackup: true
         template:
           ttl: "240h"
