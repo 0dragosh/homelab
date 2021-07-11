@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: unifi
+  name: velero
   namespace: backup
 spec:
   interval: 5m
@@ -24,17 +24,27 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    initContainers:
+    - name: velero-plugin-for-gcp
+      image: velero/velero-plugin-for-gcp:v1.2.0
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+      - mountPath: /target
+        name: plugins
     deployRestic: false
     configuration:
       provider: gcp
       backupStorageLocation:
+        name: gcp
+        default: true
+        provider: velero.io/gcp
         bucket: "${SECRET_VELERO_BACKUP_BUCKET}"
     credentials:
       existingSecret: gcp-credentials
     schedules:
       backup-all:
         disabled: false
-        schedule: "22 0 * * *"
+        schedule: "26 20 * * *"
         useOwnerReferencesInBackup: true
         template:
           ttl: "240h"
