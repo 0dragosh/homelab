@@ -9,3 +9,4 @@ resources:
 - linkerd
 - longhorn
 - metallb
+- terraform
