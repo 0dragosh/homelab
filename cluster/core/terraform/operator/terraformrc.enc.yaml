@@ -14,17 +14,17 @@ sops:
   lastmodified: "2021-07-11T08:21:31Z"
   mac: ENC[AES256_GCM,data:/gVs+dS7+s07ECwvROa0HhWiOkOTa/lvLHgNFha8IEE0CTQdFMUGIyHS3DLiq/HzCtClb7FTR9JwD/wAcPm3GoAJip3tW8XOoC/jJAg3SbjstTNszdi6P4aNJlh37cSgxX65glHSoLHolfeuz6RcON6gwvOkQTkuwECS3BAGj6o=,iv:zl3pbtrtQi9hpJZ+p53MMVFMFLjLb7WWBZJiWKfWTIg=,tag:mWE+pSoexOmIb3mGNCP5ww==,type:str]
   pgp:
-  - created_at: "2021-07-11T08:21:31Z"
-    enc: |
-      -----BEGIN PGP MESSAGE-----
+    - created_at: "2021-07-11T08:21:31Z"
+      enc: |
+        -----BEGIN PGP MESSAGE-----
 
-      hF4D6WA68kfd/TYSAQdAjMg+F/Wtbc4uamr2vHYSCxc56Dcm9cq/LB5GEJsMviIw
-      WAHQM5IbS7zSO3HBLBhzyGD5nSf8+s6baIkAqIMyEN5O40ohm5X+IsTGUWxdMvJw
-      1GgBCQIVhsBD/6ffrZl0LUe+NvPMkK+7N5xfEYDEX0w5xKF2+UOnHLb1fiVgtRCE
-      4IWAO5jR5Wr/1UcR9mTP+LdPTdnZmhra1rL67PtO8STPlkxpeoJ2JPA47wN8aNey
-      hL4nwgENAWQ3dg==
-      =Ui+A
-      -----END PGP MESSAGE-----
-    fp: A2E1DD9D0CB63F48A16AD076AC5A5E0C20FB7AEC
+        hF4D6WA68kfd/TYSAQdAjMg+F/Wtbc4uamr2vHYSCxc56Dcm9cq/LB5GEJsMviIw
+        WAHQM5IbS7zSO3HBLBhzyGD5nSf8+s6baIkAqIMyEN5O40ohm5X+IsTGUWxdMvJw
+        1GgBCQIVhsBD/6ffrZl0LUe+NvPMkK+7N5xfEYDEX0w5xKF2+UOnHLb1fiVgtRCE
+        4IWAO5jR5Wr/1UcR9mTP+LdPTdnZmhra1rL67PtO8STPlkxpeoJ2JPA47wN8aNey
+        hL4nwgENAWQ3dg==
+        =Ui+A
+        -----END PGP MESSAGE-----
+      fp: A2E1DD9D0CB63F48A16AD076AC5A5E0C20FB7AEC
   encrypted_regex: ^stringData
   version: 3.7.1
