@@ -26,6 +26,20 @@ spec:
       main:
         primary: true
         enabled: true
+        ingressClassName: "traefik-public"
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        hosts:
+        - host: "dizque.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "dizque.${SECRET_DOMAIN}"
+      api:
+        enabled: true
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
@@ -33,7 +47,7 @@ spec:
         hosts:
         - host: "dizquetv.${SECRET_DOMAIN}"
           paths:
-          - path: /
+          - path: /api
             pathType: Prefix
         tls:
         - hosts:

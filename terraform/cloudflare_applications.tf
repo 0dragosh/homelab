@@ -1,6 +1,7 @@
 locals {
   apps = [
     "bazarr",
+    "dizquetv",
     "grafana",
     "longhorn",
     "nzbget",
