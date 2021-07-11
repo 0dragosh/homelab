@@ -11,6 +11,6 @@ resources:
 - media.yaml
 - monitoring.yaml
 - networking.yaml
-- velero.yaml
+- backup.yaml
 - linkerd.yaml
 - terraform.yaml
