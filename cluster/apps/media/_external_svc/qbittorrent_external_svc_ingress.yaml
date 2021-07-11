@@ -28,12 +28,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-#    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
   name: qbittorrent
   namespace: media
 spec:
-  ingressClassName: "traefik"
+  ingressClassName: "traefik-public"
   rules:
     - host: "qbittorrent.${SECRET_DOMAIN}"
       http:
