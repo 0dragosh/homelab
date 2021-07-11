@@ -1,30 +1,29 @@
----
 apiVersion: v1
 kind: Secret
 metadata:
   name: terraformrc
   namespace: terraform
 stringData:
-  credentials: ENC[AES256_GCM,data:r2bkIQVUX3Re5BBdqNtcV76OuaHtDn7HCSaqmLC4Q7K0karJ8OdJlJKAQXaD8hGdnlpPfUwKGc1c+toyDysWpsoDlgFGCFy65H105GrlTqE5x8b3AfgotxTV,iv:GhIxM1JiOvBrUkcMBZCUV62mNSQ486CizTJD9t47Kto=,tag:CosAE8uI+2rqGVX9otwR3A==,type:str]
+  credentials: ENC[AES256_GCM,data:2OTQPRAgm3fouTjzBXeDU8FLa6ZrI21ymqwzS+Vj7Tq5iXe5tLpkGO9tnI6SnMhbHrsGWYx8OVslMNvIFLyXTyboy8ffNn/vrR327HVMapIT3PYIYQ+uegsqem8lWy3YxrolEUQ8p0k=,iv:FHlTMg37xunl2HZdXNRqZhZ78vfn5/TS1ksUugFHXC8=,tag:4OVfqsOVG/OXwOkW+t+d6w==,type:str]
 sops:
   kms: []
   gcp_kms: []
   azure_kv: []
   hc_vault: []
   age: []
-  lastmodified: "2021-07-10T16:34:24Z"
-  mac: ENC[AES256_GCM,data:VXSLGmkQuwq5z3rdTCBVvFMToZ3RO323gpo/RaeKhNWSxen40rpbJ2tDTTPtKIlbGF7lnaHglDWQkT2jkbz836+fS3wj3fxbR2Bon5HED1xJmfSb1GY16C5JwCkTmcxCN+l4kJSB/ua3wPTGRiTUOHJxBDyn5XuClfDoOaRRJyE=,iv:uPfqiFy2tmolSfZpljqChcwXFWWvZlNn9NDCEU2/xBs=,tag:7EKRNPMhbVh6cywgjUWLVQ==,type:str]
+  lastmodified: "2021-07-11T08:11:05Z"
+  mac: ENC[AES256_GCM,data:PrmD9OWvT62CjjHwfO81c6mF+NxAK0I2q6NzZiRtror0ZBr0f/uO4wojUjwl6/0Ej0wfOfDkpqlk+bgC8/EPtiXrac3qNpI/Jm08AJJcIvKFMO2UCiT3PkaThbFKuevZz8t8I8CC6xkwi7PsRhbGMC9w0j8Jt4DtOeLSUFW/i8w=,iv:1n7hm52Uggqx/duvC1v5YNkng/8GAWwebPSl1LTyCVI=,tag:PuQHUhClx3Gh5N/wS3mGrw==,type:str]
   pgp:
-  - created_at: "2021-07-10T16:34:24Z"
+  - created_at: "2021-07-11T08:11:04Z"
     enc: |
       -----BEGIN PGP MESSAGE-----
 
-      hF4D6WA68kfd/TYSAQdA8v5L6r2oACEqHy7HDwTbWRq41gpEh767kLy8ZpJsbwEw
-      dNmeNp5UHpVMEtSF3xFrE/3tg481HmbBJDcV7P3P2PdKtOQVkxsDgoz44IipLvAc
-      1GYBCQIVzYZIj1HvEqrhUZpykPIy0JPSVheOxrexdBSThZKUrgeSwi84AKCneHGl
-      sdzT7dxHKFN9DdvH3n0wI1AJEaoR+c0SsEdlTQn0ytHcu+LOsC1bKLacXvrBKjPU
-      8NmY4nJpZj4=
-      =1mwD
+      hF4D6WA68kfd/TYSAQdAKs8mpCeJvrzgwdPwB9OtRX02k7j7hnkyUnoIY6BsGEUw
+      lrtmRPOIRTypHSulRNOiVjwT1g4SH+xNJKXEjLLZkGxh5i/yRfOkpzVteHnKwCzA
+      1GgBCQIV+nmurFwKqAjgnPKwowqqAtmlZ5rsQOvtUsSZ7QSFXupieDNXAgUNz/+f
+      12T/y0914feX6CG/bbLScMGk3keTlCzc1LiYypwIg5Q6ifJgsvSKWsq0qIbolqdj
+      ogeK3IxJ9MhPhQ==
+      =ecR1
       -----END PGP MESSAGE-----
     fp: A2E1DD9D0CB63F48A16AD076AC5A5E0C20FB7AEC
   encrypted_regex: ^stringData
