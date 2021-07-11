@@ -25,8 +25,6 @@ spec:
       GF_LOG_FILTERS: rendering:debug
     adminPassword: "${SECRET_GRAFANA_PASSWORD}"
     grafana.ini:
-      auth.anonymous:
-        enabled: true
       server:
         root_url: "https://grafana.${SECRET_DOMAIN}"
       paths:
@@ -40,6 +38,8 @@ spec:
         mode: console
       grafana_net:
         url: https://grafana.net
+      auth.basic:
+        disable_login_form: false
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
