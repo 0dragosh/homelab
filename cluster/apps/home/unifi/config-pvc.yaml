@@ -11,3 +11,37 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: unifi-config-old
+  namespace: home
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: longhorn
+  volumeName: unifi-config-old
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: unifi-config-old
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+      staleReplicaTimeout: '30'
+    volumeHandle: "pvc-ba28b7f4-5320-4e6d-b0d8-baa171e2eef4"
+  storageClassName: longhorn
