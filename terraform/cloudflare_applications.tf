@@ -10,6 +10,7 @@ locals {
     "qbittorrent",
     "radarr",
     "readarr",
+    "resilio",
     "sonarr",
     "tautulli",
   ]
