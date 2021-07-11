@@ -8,13 +8,12 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: terraform
       version: 1.0.0
       sourceRef:
         kind: HelmRepository
-        name: terraform-charts
-        namespace: terraform
+        name: hashicorp-charts
+        namespace: flux-system
       interval: 5m
   values:
     syncWorkspace:

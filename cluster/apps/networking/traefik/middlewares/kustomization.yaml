@@ -5,5 +5,5 @@ resources:
 - cloudflare.yaml
 - rfc1918.yaml
 - redirect-path.yaml
-- secret.enc.yaml
+- terraformrc.enc.yaml
 - basic-auth.yaml
