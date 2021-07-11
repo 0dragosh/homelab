@@ -23,9 +23,9 @@ k3s_registration_address: 10.250.14.200
 # Comment after install and run `task ansible:purge-manifests`
 
 # Custom manifest files
-k3s_server_manifests_templates:
-- "kube-vip/kube-vip-rbac.yaml.j2"
-- "kube-vip/kube-vip-daemonset.yaml.j2"
+#k3s_server_manifests_templates:
+#- "kube-vip/kube-vip-rbac.yaml.j2"
+#- "kube-vip/kube-vip-daemonset.yaml.j2"
 
 #k3s_server_manifests_urls:
 #- url: https://my.yaml

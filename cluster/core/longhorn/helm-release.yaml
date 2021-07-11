@@ -32,7 +32,7 @@ spec:
       reclaimPolicy: Retain
       recurringJobs:
         enable: true
-        jobList: '[{"name":"snap","task":"snapshot","cron":"30 * * * *","retain":10},{"name":"backup","task":"backup","cron":"0 * * * *","retain":10}]'
+        jobList: '[{"name":"snap","task":"snapshot","cron":"30 * * * *","retain":1},{"name":"backup","task":"backup","cron":"0 * * * *","retain":10}]'
     csi:
       # kubeletRootDir: /var/snap/microk8s/common/var/lib/kubelet
       kubeletRootDir: /var/lib/kubelet
