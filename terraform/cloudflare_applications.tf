@@ -5,6 +5,7 @@ locals {
     "nzbget",
     "plex-requests",
     "prowlarr",
+    "qbittorrent",
     "radarr",
     "readarr",
     "sonarr",
