@@ -68,7 +68,7 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: botdarr-config-v2
+            claimName: botdarr-config-v3
         - name: media
           persistentVolumeClaim:
             claimName: media-nfs

@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: botdarr-config-v2
+  name: botdarr-config-v3
   namespace: media
 spec:
   accessModes:
@@ -11,4 +11,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: longhorn-static
+  storageClassName: longhorn

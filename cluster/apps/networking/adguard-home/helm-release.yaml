@@ -186,7 +186,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: adguard-config-v2
+        existingClaim: adguard-config-v3
         volumeMounts:
         - name: config
           mountPath: /config

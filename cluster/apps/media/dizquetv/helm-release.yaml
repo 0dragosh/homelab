@@ -64,7 +64,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: dizquetv-config-v2
+        existingClaim: dizquetv-config-v3
     resources:
       limits:
         cpu: 10000m

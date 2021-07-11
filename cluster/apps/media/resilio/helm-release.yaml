@@ -44,7 +44,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: resilio-config-v2
+        existingClaim: resilio-config-v3
       sync:
         enabled: true
         existingClaim: sync-nfs

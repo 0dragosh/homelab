@@ -66,7 +66,7 @@ spec:
     persistence:
       enabled: true
       accessMode: ReadWriteOnce
-      existingClaim: unifi-config-v2
+      existingClaim: unifi-config-v3
     jvmMaxHeapSize: 8192M
     resources:
       limits:

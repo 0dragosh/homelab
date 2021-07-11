@@ -44,10 +44,10 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: nzbget-config-v2
+        existingClaim: nzbget-config-v3
       downloads:
         enabled: true
-        existingClaim: nzbget-downloads-v2
+        existingClaim: nzbget-downloads-v3
         mountPath: /downloads
       media:
         enabled: true

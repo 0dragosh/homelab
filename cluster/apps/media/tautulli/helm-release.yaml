@@ -42,7 +42,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: tautulli-config-v2
+        existingClaim: tautulli-config-v3
     resources:
       requests:
         memory: 250Mi
