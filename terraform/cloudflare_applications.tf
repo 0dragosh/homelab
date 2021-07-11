@@ -2,6 +2,7 @@ locals {
   apps = [
     "bazarr",
     "grafana",
+    "longhorn",
     "nzbget",
     "plex-requests",
     "prowlarr",
