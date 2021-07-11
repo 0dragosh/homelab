@@ -5,13 +5,12 @@ resources:
 - _pvc
 - _external_svc
 - bazarr
-- botdarr
 - dizquetv
 - nzbget
 - overseerr
-#- plex
+# - plex
 - prowlarr
-#- qbittorrent
+# - qbittorrent
 - radarr
 - readarr
 - resilio

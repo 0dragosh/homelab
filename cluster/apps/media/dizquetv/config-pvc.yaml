@@ -11,3 +11,37 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dizquetv-config-v2
+  namespace: media
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: longhorn
+  volumeName: dizquetv-config-v2
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dizquetv-config-v2
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+      staleReplicaTimeout: '30'
+    volumeHandle: "pvc-a852a969-706f-48d1-ad52-924c77cf0cf6"
+  storageClassName: longhorn
