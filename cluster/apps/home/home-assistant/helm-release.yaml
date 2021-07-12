@@ -30,10 +30,11 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        primary: true
+        ingressClassName: "traefik-public"
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
         - host: "hass.${SECRET_DOMAIN}"
           paths:
@@ -42,6 +43,20 @@ spec:
         tls:
         - hosts:
           - "hass.${SECRET_DOMAIN}"
+      local:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+        hosts:
+        - host: "hass.local.${SECRET_DOMAIN}"
+          paths:
+          - path: /api
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "hass.local.${SECRET_DOMAIN}"
     persistence:
       config:
         enabled: true
