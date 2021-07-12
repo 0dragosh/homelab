@@ -3,6 +3,7 @@ locals {
     "bazarr",
     "dizquetv",
     "grafana",
+    "hass",
     "longhorn",
     "nzbget",
     "plex-requests",
