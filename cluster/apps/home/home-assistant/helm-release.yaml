@@ -52,7 +52,7 @@ spec:
         hosts:
         - host: "hass.local.${SECRET_DOMAIN}"
           paths:
-          - path: /api
+          - path: /
             pathType: Prefix
         tls:
         - hosts:
