@@ -31,5 +31,6 @@ spec:
     name: '*'
   exclusionList:
   - "error.*lookup github\\.com"
+  - "Get.*EOF"
   - "waiting.*socket"
   suspend: false
