@@ -42,3 +42,8 @@ resource "cloudflare_access_policy" "policy" {
     email_domain = [var.email_domain]
   }
 }
+
+resource "cloudflare_access_service_token" "token" {
+  zone_id        = var.zone_id
+  name           = "service token"
+}
