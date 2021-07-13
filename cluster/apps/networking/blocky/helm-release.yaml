@@ -53,17 +53,36 @@ spec:
       clientLookup:
         upstream: tcp+udp:${GATEWAY_ADDRESS}
       blocking:
+        refreshPeriod: 60
         blackLists:
           ads:
+          # https://oisd.nl/
           - https://raw.githubusercontent.com/ookangzheng/dbl-oisd-nl/master/dbl.txt
+          # filter
           - https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
+          # adaway
           - https://adaway.org/hosts.txt
+          # windows
           - https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt
+          # yoyo
           - https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=1&mimetype=plaintext
+          # smarttv
           - https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV-AGH.txt
+          # consoles
           - https://raw.githubusercontent.com/DandelionSprout/adfilt/master/GameConsoleAdblockList.txt
+          # someonewhocares
           - https://someonewhocares.org/hosts/zero/hosts
+          # RO adblock
           - https://raw.githubusercontent.com/tcptomato/ROad-Block/master/road-block-filters.txt
+          # stevenBlack
+          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+          # cameleon
+          - http://sysctl.org/cameleon/hosts
+          # disconnect
+          - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+        whiteLists:
+          ads:
+          - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
         clientGroupsBlock:
           default:
           - ads
