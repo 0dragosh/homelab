@@ -15,6 +15,12 @@ locals {
     "sonarr",
     "tautulli",
   ]
+
+  apps_token = [
+    "nzbget",
+    "radarr",
+    "sonarr",
+  ]
 }
 
 resource "cloudflare_access_application" "app" {
@@ -39,7 +45,8 @@ resource "cloudflare_access_policy" "policy" {
   decision       = "allow"
 
   include {
-    email_domain = [var.email_domain]
+    service_token = contains(local.apps_token,each.value.name) ? [cloudflare_access_service_token.token.id] : []
+    email_domain  = [var.email_domain]
   }
 }
 
