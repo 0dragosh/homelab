@@ -51,7 +51,6 @@ spec:
       clientLookup:
         upstream: udp:${GATEWAY_ADDRESS}
       blocking:
-        blockType: zeroIP
         blackLists:
           ads:
           - https://raw.githubusercontent.com/ookangzheng/dbl-oisd-nl/master/dbl.txt
