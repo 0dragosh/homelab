@@ -38,20 +38,6 @@ spec:
         tls:
         - hosts:
           - "radarr.${SECRET_DOMAIN}"
-      api:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
-        hosts:
-        - host: "radarrapi.local.${SECRET_DOMAIN}"
-          paths:
-          - path: /api
-            pathType: Prefix
-        tls:
-        - hosts:
-          - "radarrapi.local.${SECRET_DOMAIN}"
     podSecurityContext:
       fsGroup: 568
     persistence:

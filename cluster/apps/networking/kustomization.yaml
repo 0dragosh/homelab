@@ -6,4 +6,4 @@ resources:
 - secret-reflector
 - traefik
 - wildcard-certificate
-- adguard-home
+- blocky

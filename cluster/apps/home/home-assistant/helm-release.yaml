@@ -64,9 +64,39 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
-    resources:
-      requests:
-        cpu: 100m
-        memory: 100Mi
-      limits:
-        memory: 4000Mi
+#    addons:
+#      codeserver:
+#        enabled: true
+#        image:
+#          repository: codercom/code-server
+#          tag: 3.10.2
+#        git:
+#          deployKeySecret: code-server
+#        workingDir: "/config"
+#        args:
+#        - --auth
+#        - "none"
+#        - --user-data-dir
+#        - "/config/.vscode"
+#        - --extensions-dir
+#        - "/config/.vscode"
+#        ingress:
+#          enabled: true
+#          ingressClassName: "traefik"
+#          annotations:
+#            external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+#            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+#          hosts:
+#          - host: "hass-config.${SECRET_DOMAIN}"
+#            paths:
+#            - path: /
+#              pathType: Prefix
+#          tls:
+#          - hosts:
+#            - "hass-config.${SECRET_DOMAIN}"
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100Mi
+        limits:
+          memory: 4000Mi

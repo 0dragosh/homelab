@@ -104,6 +104,9 @@ spec:
         sonarr:
           url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/sonarr.json
           datasource: Prometheus
+        blocky:
+          url: https://raw.githubusercontent.com/0xERR0R/blocky/master/docs/blocky-grafana.json
+          datasource: Prometheus
     sidecar:
       dashboards:
         enabled: true
@@ -124,7 +127,6 @@ spec:
       enabled: true
       ingressClassName: "traefik-public"
       annotations:
-        kubernetes.io/ingress.class: "traefik-public"
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       hosts:
