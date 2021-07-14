@@ -50,7 +50,7 @@ spec:
         - hostname: "storage.${SECRET_DOMAIN}"
           service: ssh://10.250.1.100:22
         - hostname: "*.${SECRET_DOMAIN}"
-          service: http://traefik.networking
+          service: https://traefik.networking
         - service: http_status:404
     resources:
       requests:
