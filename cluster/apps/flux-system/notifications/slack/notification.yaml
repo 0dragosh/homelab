@@ -33,4 +33,5 @@ spec:
   - "error.*lookup github\\.com"
   - "Get.*EOF"
   - "waiting.*socket"
+  - ".*error: ssh: handshake.*"
   suspend: false
