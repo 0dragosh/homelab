@@ -29,11 +29,11 @@ kind: Ingress
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    external-dns.alpha.kubernetes.io/target: "${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"
   name: cockpit
   namespace: media
 spec:
-  ingressClassName: "traefik-public"
+  ingressClassName: "traefik"
   rules:
   - host: "cockpit.${SECRET_DOMAIN}"
     http:
