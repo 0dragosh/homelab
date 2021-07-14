@@ -23,6 +23,7 @@ spec:
     sources:
     - ingress
     - service
+    - crd
     provider: cloudflare
     cloudflare:
       secretName: cloudflare-api-key
