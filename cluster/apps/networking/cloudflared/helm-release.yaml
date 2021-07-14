@@ -44,7 +44,7 @@ spec:
       transport-loglevel: "info"
       ingress:
         - hostname: "k8sapi.${SECRET_DOMAIN}"
-          service: tcp://kubernetes.default:6443
+          service: tcp://kubernetes.default:443
           originRequest:
             proxyType: socks
         - hostname: "storage.${SECRET_DOMAIN}"
