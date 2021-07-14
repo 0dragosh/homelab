@@ -24,23 +24,19 @@ spec:
       name: giantswarm/debug
       tag: master
       pullPolicy: IfNotPresent
-
     image:
       registry: quay.io
       name: giantswarm/cloudflared
       tag: 2021.6.0
       pullPolicy: IfNotPresent
-
     accountEmail: "${SECRET_EMAIL_CLOUDFLARE}"
     accountId: "${SECRET_CLOUDFLARE_ACCOUNT_ID}"
     apiKey: "${SECRET_CLOUDFLARE_APIKEY_GLOBAL}"
     tunnelSecretBase64: "${SECRET_CLOUDFLARE_TUNNEL_SECRET}"
-
     useExistingTunnels:
       enabled: false
       credentialsSecretName: ""
       tunnel: ""
-
     config:
       no-tls-verify: false
       loglevel: "info"
@@ -48,7 +44,6 @@ spec:
       ingress:
         - hostname: "k8sapi.${SECRET_DOMAIN}"
           service: https://kubernetes.default.svc.cluster.local
-
     resources:
       requests:
         memory: "100Mi"
@@ -56,3 +51,14 @@ spec:
       limits:
         memory: "100Mi"
         cpu: "100m"
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - target:
+              kind: Deployment
+              name: cloudflared
+            patch:
+              - op: add
+                path: "/spec/template/metadata/annotations"
+                value:
+                  linkerd.io/inject: disabled
