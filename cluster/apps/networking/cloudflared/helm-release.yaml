@@ -49,8 +49,8 @@ spec:
             proxyType: socks
         - hostname: "storage.${SECRET_DOMAIN}"
           service: ssh://10.250.1.100:22
-        - hostname: "bastion.${SECRET_DOMAIN}"
-          service: bastion
+        - hostname: "*.${SECRET_DOMAIN}"
+          service: http://traefik.networking
         - service: http_status:404
     resources:
       requests:
