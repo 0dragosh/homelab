@@ -11,6 +11,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          annotations:
+            linkerd.io/inject: disabled
         spec:
           serviceAccountName: sa-secret-reflector
           containers:
