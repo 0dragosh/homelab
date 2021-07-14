@@ -51,6 +51,8 @@ spec:
           service: ssh://10.250.1.100:22
         - hostname: "*.${SECRET_DOMAIN}"
           service: https://traefik.networking
+          originRequest:
+            noTLSVerify: true
         - service: http_status:404
     resources:
       requests:
