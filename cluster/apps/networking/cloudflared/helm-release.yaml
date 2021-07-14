@@ -43,8 +43,8 @@ spec:
       loglevel: "info"
       transport-loglevel: "info"
       ingress:
-        - hostname: "k8sapi.${SECRET_DOMAIN}"
-          service: https://kubernetes.default.svc.cluster.local
+        - hostname: "unifi-argo.${SECRET_DOMAIN}"
+          service: https://unifi-gui.home
         - service: http_status:404
     resources:
       requests:
