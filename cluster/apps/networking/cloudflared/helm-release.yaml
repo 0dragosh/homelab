@@ -2,26 +2,23 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: blocky
+  name: cloudflared
   namespace: networking
 spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: blocky
-      version: 7.1.0
+      chart: cloudflared
+      version: 0.2.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: giantswarm-charts
         namespace: flux-system
       interval: 5m
   values:
     namespace: networking
     serviceType: managed
-
     replicas: 1
-
     initImage:
       registry: quay.io
       name: giantswarm/debug
@@ -48,6 +45,9 @@ spec:
       no-tls-verify: false
       loglevel: "info"
       transport-loglevel: "info"
+      ingress:
+        - hostname: "k8sapi.${SECRET_DOMAIN}"
+          service: https://kubernetes.default.svc.cluster.local
 
     resources:
       requests:
