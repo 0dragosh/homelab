@@ -69,8 +69,4 @@ spec:
               - op: add
                 path: "/spec/template/metadata/annotations"
                 value:
-                  linkerd.io/inject: disabled
-              - op: add
-                path: "/spec/template/metadata/annotations"
-                value:
                   configmap.reloader.stakater.com/reload: "cloudflared"
