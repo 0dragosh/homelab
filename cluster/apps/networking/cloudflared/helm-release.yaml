@@ -19,7 +19,7 @@ spec:
   values:
     namespace: networking
     serviceType: managed
-    replicas: 1
+    replicas: 2
     initImage:
       registry: quay.io
       name: giantswarm/debug
