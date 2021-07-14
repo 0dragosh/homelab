@@ -23,6 +23,8 @@ spec:
       GF_EXPLORE_ENABLED: true
       GF_PANELS_DISABLE_SANITIZE_HTML: true
       GF_LOG_FILTERS: rendering:debug
+      GF_AUTH_GOOGLE_CLIENT_ID: "${SECRET_GOOGLE_OAUTH_CLIENT_ID}"
+      GF_AUTH_GOOGLE_CLIENT_SECRET: "${SECRET_GOOGLE_OAUTH_CLIENT_SECRET}"
     adminPassword: "${SECRET_GRAFANA_PASSWORD}"
     grafana.ini:
       server:
@@ -40,6 +42,13 @@ spec:
         url: https://grafana.net
       auth.basic:
         disable_login_form: false
+      auth.google:
+        enabled: true
+        scopes: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+        auth_url: "https://accounts.google.com/o/oauth2/auth"
+        token_url: "https://accounts.google.com/o/oauth2/token"
+        allowed_domains: "${SECRET_DOMAIN_2}"
+        allow_sign_up: true
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
