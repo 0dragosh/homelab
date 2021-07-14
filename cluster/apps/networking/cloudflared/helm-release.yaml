@@ -39,7 +39,7 @@ spec:
       credentialsSecretName: ""
       tunnel: ""
     config:
-      no-tls-verify: false
+      no-tls-verify: true
       loglevel: "info"
       transport-loglevel: "info"
       ingress:
