@@ -13,6 +13,11 @@ variable "cloudflare_api_key" {
   sensitive = true
 }
 
+variable "cloudflare_argo_tunnel_secret" {
+  type      = string
+  sensitive = true
+}
+
 variable "domain" {
   type      = string
   sensitive = true
