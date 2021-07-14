@@ -44,7 +44,7 @@ spec:
       transport-loglevel: "info"
       ingress:
         - hostname: "unifi-argo.${SECRET_DOMAIN}"
-          service: https://unifi-gui.home
+          service: https://unifi-gui.home:8443
         - service: http_status:404
     resources:
       requests:
