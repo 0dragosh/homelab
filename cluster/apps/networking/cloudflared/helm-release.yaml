@@ -45,6 +45,7 @@ spec:
       ingress:
         - hostname: "k8sapi.${SECRET_DOMAIN}"
           service: https://kubernetes.default.svc.cluster.local
+        - service: http_status:404
     resources:
       requests:
         memory: "100Mi"
