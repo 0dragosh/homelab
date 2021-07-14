@@ -43,10 +43,14 @@ spec:
       loglevel: "info"
       transport-loglevel: "info"
       ingress:
-        - hostname: "hass.local.${SECRET_DOMAIN}"
-          service: http://home-assistant.home:8123
+        - hostname: "k8sapi.${SECRET_DOMAIN}"
+          service: tcp://kubernetes.default:6443
+          originRequest:
+            proxyType: socks
         - hostname: "storage.${SECRET_DOMAIN}"
           service: ssh://10.250.1.100:22
+        - hostname: "bastion.${SECRET_DOMAIN}"
+          service: bastion
         - service: http_status:404
     resources:
       requests:
