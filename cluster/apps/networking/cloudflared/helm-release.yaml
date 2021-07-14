@@ -31,7 +31,7 @@ spec:
       pullPolicy: IfNotPresent
     accountEmail: "${SECRET_EMAIL_CLOUDFLARE}"
     accountId: "${SECRET_CLOUDFLARE_ACCOUNT_ID}"
-    apiKey: "${SECRET_CLOUDFLARE_APIKEY_GLOBAL}"
+    apiKey: "${SECRET_CLOUDFLARE_APIKEY_TUNNEL}"
     tunnelSecretBase64: "${SECRET_CLOUDFLARE_TUNNEL_SECRET}"
     useExistingTunnels:
       enabled: false
