@@ -65,7 +65,7 @@ spec:
       default:
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
-        sniStrict: true
+#        sniStrict: true
     pilot:
       enabled: true
     experimental:
