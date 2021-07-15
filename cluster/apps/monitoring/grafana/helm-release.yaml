@@ -48,7 +48,7 @@ spec:
         auth_url: "https://accounts.google.com/o/oauth2/auth"
         token_url: "https://accounts.google.com/o/oauth2/token"
         allowed_domains: "${SECRET_DOMAIN_2}"
-        allow_sign_up: true
+        allow_sign_up: false
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
