@@ -30,7 +30,7 @@ resource "cloudflare_access_application" "app" {
   name                      = each.value
   domain                    = "${each.value}.${var.domain}"
   type                      = "self_hosted"
-  session_duration          = "24h"
+  session_duration          = "240h"
   auto_redirect_to_identity = true
 }
 
