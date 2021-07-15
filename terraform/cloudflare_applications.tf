@@ -66,6 +66,5 @@ resource "cloudflare_access_policy" "requests" {
 
 resource "cloudflare_access_service_token" "token" {
   zone_id        = var.zone_id
-  account_id     = var.cloudflare_account_id
   name           = "service token"
 }
