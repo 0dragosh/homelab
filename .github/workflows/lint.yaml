@@ -10,18 +10,14 @@ on: # yamllint disable-line rule:truthy
   pull_request:
 
 jobs:
-  yaml:
+  yamllint:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
+    - name: yamllint
+      uses: reviewdog/action-yamllint@v1
       with:
-        fetch-depth: 1
-    - name: Lint YAML
-      uses: ibiqlik/action-yamllint@v3
-      with:
-        file_or_dir: "./cluster"
-        config_file: "./.github/yamllint.config.yaml"
-
+        yamllint_flags: "-c .github/yamllint.config.yaml ./cluster"
 #  bash:
 #    runs-on: ubuntu-20.04
 #    steps:
