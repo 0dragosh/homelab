@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: cloudflared
-  replicas: 2
+  replicas: 4
   template:
     metadata:
       labels:
@@ -48,6 +48,18 @@ spec:
           items:
           - key: config.yaml
             path: config.yaml
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - cloudflared
+              topologyKey: kubernetes.io/hostname
 ---
 apiVersion: v1
 kind: ConfigMap
