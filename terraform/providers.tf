@@ -4,6 +4,9 @@ terraform {
       source = "cloudflare/cloudflare"
       version = "~> 2.23.0"
     }
+    random = {
+      version = "~> 2.3.0"
+    }
   }
 }
 
