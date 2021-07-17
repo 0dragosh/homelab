@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: cloudflared
-        image: cloudflare/cloudflared:2021.6.0
+        image: cloudflare/cloudflared:2021.7.0
         args:
         - tunnel
         - --config
