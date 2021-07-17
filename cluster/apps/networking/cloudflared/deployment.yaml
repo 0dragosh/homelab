@@ -15,6 +15,7 @@ spec:
         app: cloudflared
       annotations:
         linkerd.io/inject: disabled
+        configmap.reloader.stakater.com/reload: "cloudflared"
     spec:
       containers:
       - name: cloudflared
