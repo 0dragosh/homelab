@@ -72,7 +72,7 @@ data:
         noTLSVerify: true
     - service: http_status:404
     # Name of the tunnel you want to run
-    tunnel: "${SECRET_CLOUDFLARE_TUNNEL_ID_1}"
+    tunnel: "${SECRET_CLOUDFLARE_TUNNEL_ID_1_1}"
     credentials-file: /etc/cloudflared/creds/credentials.json
     # Serves the metrics server under /metrics and the readiness server under /ready
     metrics: 0.0.0.0:2000

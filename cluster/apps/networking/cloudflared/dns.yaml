@@ -10,7 +10,7 @@ spec:
     recordTTL: 180
     recordType: CNAME
     targets:
-    - "${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"
+    - "${SECRET_CLOUDFLARE_TUNNEL_ID_1_1}.cfargotunnel.com"
 ---
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
@@ -23,7 +23,7 @@ spec:
     recordTTL: 180
     recordType: CNAME
     targets:
-    - "${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"
+    - "${SECRET_CLOUDFLARE_TUNNEL_ID_1_1}.cfargotunnel.com"
 ---
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
@@ -36,4 +36,4 @@ spec:
     recordTTL: 180
     recordType: CNAME
     targets:
-    - "${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"
+    - "${SECRET_CLOUDFLARE_TUNNEL_ID_1_1}.cfargotunnel.com"
