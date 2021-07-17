@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - dns.yaml
+- configmap.yaml
 - secret.enc.yaml

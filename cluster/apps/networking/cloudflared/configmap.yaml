@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared
+  namespace: networking
+data:
+  config.yaml: |
+    no-tls-verify: true
+    loglevel: "info"
+    transport-loglevel: "info"
+    ingress:
+    - hostname: "k8sapi.${SECRET_DOMAIN}"
+      service: tcp://kubernetes.default:443
+      originRequest:
+        proxyType: socks
+    - hostname: "storage.${SECRET_DOMAIN}"
+      service: ssh://10.250.1.100:22
+    - hostname: "*.${SECRET_DOMAIN}"
+      service: https://traefik.networking
+      originRequest:
+        noTLSVerify: true
+    - service: http_status:404
+    # Name of the tunnel you want to run
+    tunnel: "${SECRET_CLOUDFLARE_TUNNEL_ID_1}"
+    credentials-file: /etc/cloudflared/creds/credentials.json
+    # Serves the metrics server under /metrics and the readiness server under /ready
+    metrics: 0.0.0.0:2000
+    # Autoupdates applied in a k8s pod will be lost when the pod is removed or restarted, so
+    # autoupdate doesn't make sense in Kubernetes. However, outside of Kubernetes, we strongly
+    # recommend using autoupdate.
+    no-autoupdate: true
