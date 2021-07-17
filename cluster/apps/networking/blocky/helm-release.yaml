@@ -107,13 +107,13 @@ spec:
       limits:
         memory: 750Mi
   postRenderers:
-  - kustomize:
-      patchesJson6902:
-      - target:
-          kind: Deployment
-          name: blocky
-        patch:
-        - op: add
-          path: "/spec/template/metadata/annotations"
-          value:
-            linkerd.io/inject: disabled
+    - kustomize:
+        patchesJson6902:
+          - target:
+              kind: Deployment
+              name: blocky
+            patch:
+              - op: add
+                path: "/spec/template/metadata/annotations"
+                value:
+                  linkerd.io/inject: disabled
