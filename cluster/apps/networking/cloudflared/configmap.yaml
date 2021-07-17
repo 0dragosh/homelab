@@ -6,6 +6,8 @@ metadata:
   namespace: networking
 data:
   config.yaml: |
+    # Name of the tunnel you want to run
+    tunnel: "${SECRET_CLOUDFLARE_TUNNEL_ID_1}"
     no-tls-verify: true
     loglevel: "info"
     transport-loglevel: "info"
@@ -21,8 +23,6 @@ data:
       originRequest:
         noTLSVerify: true
     - service: http_status:404
-    # Name of the tunnel you want to run
-    tunnel: "${SECRET_CLOUDFLARE_TUNNEL_ID_1}"
     credentials-file: /etc/cloudflared/creds/credentials.json
     # Serves the metrics server under /metrics and the readiness server under /ready
     metrics: 0.0.0.0:2000
