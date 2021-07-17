@@ -33,11 +33,13 @@ spec:
     accountEmail: "${SECRET_EMAIL_CLOUDFLARE}"
     accountId: "${SECRET_CLOUDFLARE_ACCOUNT_ID}"
     apiKey: "${SECRET_CLOUDFLARE_APIKEY_TUNNEL}"
-    tunnelSecretBase64: "${SECRET_CLOUDFLARE_TUNNEL_SECRET}"
+#    tunnelSecretBase64: "${SECRET_CLOUDFLARE_TUNNEL_SECRET}"
     useExistingTunnels:
-      enabled: false
-      credentialsSecretName: ""
-      tunnel: ""
+      enabled: true
+      credentialsSecretName: cloudflared-credentials
+      tunnelIDs:
+        - "${SECRET_CLOUDFLARE_TUNNEL_ID_1}"
+        - "${SECRET_CLOUDFLARE_TUNNEL_ID_2}"
     config:
       no-tls-verify: true
       loglevel: "info"
