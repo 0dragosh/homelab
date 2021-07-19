@@ -48,7 +48,7 @@ spec:
           group_wait: 30s
           group_interval: 5m
           repeat_interval: 6h
-          receiver: 'discord'
+          receiver: 'slack'
           routes:
           - receiver: 'null'
             match:
@@ -116,7 +116,7 @@ spec:
         - hosts:
           - "prometheus.local.${SECRET_DOMAIN}"
       thanosService:
-        enabled: true
+        enabled: false
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: "replica"
@@ -150,4 +150,4 @@ spec:
 #            honor_timestamps: true
 #            static_configs:
 #              - targets:
-#                  - 192.168.1.1:9100
+#                  - ${STORAGE_ADDRESS}:9100
