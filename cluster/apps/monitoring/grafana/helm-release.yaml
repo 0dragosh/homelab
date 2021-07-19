@@ -10,19 +10,27 @@ spec:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: grafana
-      version: 6.13.10
+      version: 6.14.0
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
         namespace: flux-system
       interval: 5m
   values:
-    deploymentStrategy:
-      type: Recreate
+    replicas: 1
     env:
       GF_EXPLORE_ENABLED: true
       GF_PANELS_DISABLE_SANITIZE_HTML: true
       GF_LOG_FILTERS: rendering:debug
+      GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
+      GF_DATE_FORMATS_FULL_DATE: "MMM Do, YYYY hh:mm:ss a"
+      GF_DATE_FORMATS_INTERVAL_SECOND: "hh:mm:ss a"
+      GF_DATE_FORMATS_INTERVAL_MINUTE: "hh:mm a"
+      GF_DATE_FORMATS_INTERVAL_HOUR: "DD/MM hh:mm a"
+      GF_DATE_FORMATS_INTERVAL_DAY: "DD/MM"
+      GF_DATE_FORMATS_INTERVAL_MONTH: "MM-YYYY"
+      GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
+      VAR_BLOCKY_URL: "http://blocky.networking.svc.cluster.local:4000"
       GF_AUTH_GOOGLE_CLIENT_ID: "${SECRET_GOOGLE_OAUTH_CLIENT_ID}"
       GF_AUTH_GOOGLE_CLIENT_SECRET: "${SECRET_GOOGLE_OAUTH_CLIENT_SECRET}"
     adminPassword: "${SECRET_GRAFANA_PASSWORD}"
@@ -48,7 +56,7 @@ spec:
         auth_url: "https://accounts.google.com/o/oauth2/auth"
         token_url: "https://accounts.google.com/o/oauth2/token"
         allowed_domains: "${SECRET_DOMAIN_2}"
-        allow_sign_up: false
+        allow_sign_up: true
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
@@ -64,11 +72,15 @@ spec:
     datasources:
       datasources.yaml:
         apiVersion: 1
+        # list of datasources that should be deleted from the database
+        deleteDatasources:
+        - name: Loki
+          orgId: 1
         datasources:
         - name: Prometheus
           type: prometheus
-          url: http://prometheus-operated:9090
           access: proxy
+          url: http://prometheus:9090/
           isDefault: true
         - name: Loki
           type: loki
@@ -76,7 +88,6 @@ spec:
           url: http://loki:3100
     dashboards:
       default:
-        # Ref: https://grafana.com/grafana/dashboards/11315
         unifi-client-insights:
           gnetId: 11315
           revision: 8
@@ -107,14 +118,14 @@ spec:
         flux-control-plane:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
           datasource: Prometheus
+        blocky:
+          url: https://raw.githubusercontent.com/0xERR0R/blocky/master/docs/blocky-grafana.json
+          datasource: Prometheus
         radarr:
           url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/radarr.json
           datasource: Prometheus
         sonarr:
           url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/sonarr.json
-          datasource: Prometheus
-        blocky:
-          url: https://raw.githubusercontent.com/0xERR0R/blocky/master/docs/blocky-grafana.json
           datasource: Prometheus
     sidecar:
       dashboards:
@@ -143,11 +154,12 @@ spec:
       tls:
       - hosts:
         - "grafana.${SECRET_DOMAIN}"
+    serviceAccount:
+      create: true
+      autoMount: true
     persistence:
       enabled: true
       storageClassName: longhorn
       size: 10Gi
       accessModes:
       - ReadWriteOnce
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: "grafana"

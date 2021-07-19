@@ -17,16 +17,17 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    fullnameOverride: prometheus
     alertmanager:
       config:
         global:
-          slack_api_url: "${SECRET_ALERT_MANAGER_DISCORD_WEBHOOK}"
+          slack_api_url: "${SECRET_ALERT_MANAGER_SLACK_WEBHOOK}"
           resolve_timeout: 5m
         receivers:
         - name: 'null'
-        - name: 'discord'
+        - name: 'slack'
           slack_configs:
-          - channel: '#prometheus'
+          - channel: '#homelab'
             icon_url: https://avatars3.githubusercontent.com/u/3380462
             username: 'Prometheus'
             send_resolved: true
@@ -42,10 +43,6 @@ spec:
                 {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
                 {{ end }}
               {{ end }}
-        - name: 'webhook'
-          webhook_configs:
-          - url: "http://192.168.1.35:9000/hooks/webhook-ups"
-            send_resolved: false
         route:
           group_by: ['alertname', 'job']
           group_wait: 30s
@@ -56,14 +53,9 @@ spec:
           - receiver: 'null'
             match:
               alertname: Watchdog
-          - receiver: 'discord'
+          - receiver: 'slack'
             match_re:
-              # severity: critical|warning
               severity: critical
-            continue: true
-          - receiver: 'webhook'
-            match:
-              alertname: UPS15MinutesRemaining
             continue: true
         inhibit_rules:
         - source_match:
@@ -76,12 +68,13 @@ spec:
         pathType: Prefix
         ingressClassName: "traefik"
         annotations:
+          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
-        - "alert-manager.${SECRET_DOMAIN}"
+        - "alert-manager.local.${SECRET_DOMAIN}"
         tls:
         - hosts:
-          - "alert-manager.${SECRET_DOMAIN}"
+          - "alert-manager.local.${SECRET_DOMAIN}"
       alertmanagerSpec:
         storage:
           volumeClaimTemplate:
@@ -99,39 +92,34 @@ spec:
           sourceLabels:
           - __meta_kubernetes_pod_node_name
           targetLabel: kubernetes_node
+    kube-state-metrics:
+      fullnameOverride: kube-state-metrics
+    prometheus-node-exporter:
+      fullnameOverride: node-exporter
     grafana:
       enabled: false
-    kubelet:
-      enabled: true
-      serviceMonitor:
-        metricRelabelings:
-        - action: replace
-          sourceLabels:
-          - node
-          targetLabel: instance
-    kubeApiServer:
-      enabled: true
-    kubeControllerManager:
-      enabled: false
-    kubeScheduler:
-      enabled: false
-    kubeProxy:
-      enabled: false
-    kubeEtcd:
-      enabled: false
+      forceDeployDashboards: true
+    # Setting this option to 0 disabled CPU limits
+    prometheusOperator:
+      configReloaderCpu: 0
     prometheus:
       ingress:
         enabled: true
         pathType: Prefix
         ingressClassName: "traefik"
         annotations:
+          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
-        - "prometheus.${SECRET_DOMAIN}"
+        - "prometheus.local.${SECRET_DOMAIN}"
         tls:
         - hosts:
-          - "prometheus.${SECRET_DOMAIN}"
+          - "prometheus.local.${SECRET_DOMAIN}"
+      thanosService:
+        enabled: true
       prometheusSpec:
+        replicas: 1
+        replicaExternalLabelName: "replica"
         ruleSelector: {}
         ruleNamespaceSelector: {}
         ruleSelectorNilUsesHelmValues: false
@@ -141,20 +129,25 @@ spec:
         podMonitorSelector: {}
         podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
-        retention: 14d
+        retention: 6h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn
+              storageClassName: "longhorn"
               resources:
                 requests:
-                  storage: 50Gi
-#      additionalScrapeConfigs:
-#      - job_name: 'node-exporter'
-#        honor_timestamps: true
-#        static_configs:
-#        - targets:
-#        # rocinante nas
-#          - 10.250.1.100:9100
+                  storage: 10Gi
+#        thanos:
+#          image: quay.io/thanos/thanos:v0.21.1
+#          version: v0.21.1
+#          objectStorageConfig:
+#            name: thanos-objstore
+#            key: objstore.yml
+#        additionalScrapeConfigs:
+#          - job_name: 'node-exporter'
+#            honor_timestamps: true
+#            static_configs:
+#              - targets:
+#                  - 192.168.1.1:9100
