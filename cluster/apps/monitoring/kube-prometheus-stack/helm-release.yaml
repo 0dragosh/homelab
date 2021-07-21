@@ -102,7 +102,14 @@ spec:
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
       configReloaderCpu: 0
+    defaultRules:
+      create: true
+    kubeStateMetrics:
+      enabled: true
+      serviceMonitor:
     prometheus:
+      serviceMonitor:
+        selfMonitor: true
       ingress:
         enabled: true
         pathType: Prefix
@@ -120,16 +127,16 @@ spec:
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: "replica"
-        ruleSelector: {}
-        ruleNamespaceSelector: {}
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
-        serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelector: {}
-        podMonitorNamespaceSelector: {}
-        podMonitorSelectorNilUsesHelmValues: false
-        retention: 6h
+#        ruleSelector: {}
+#        ruleNamespaceSelector: {}
+#        ruleSelectorNilUsesHelmValues: false
+#        serviceMonitorSelector: {}
+#        serviceMonitorNamespaceSelector: {}
+#        serviceMonitorSelectorNilUsesHelmValues: false
+#        podMonitorSelector: {}
+#        podMonitorNamespaceSelector: {}
+#        podMonitorSelectorNilUsesHelmValues: false
+        retentionSize: 9GB
         enableAdminAPI: true
         walCompression: true
         storageSpec:
