@@ -107,6 +107,8 @@ spec:
     kubeStateMetrics:
       enabled: true
       serviceMonitor:
+        selfMonitor:
+          enabled: true
     prometheus:
       serviceMonitor:
         selfMonitor: true
@@ -127,15 +129,15 @@ spec:
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: "replica"
-#        ruleSelector: {}
-#        ruleNamespaceSelector: {}
-#        ruleSelectorNilUsesHelmValues: false
-#        serviceMonitorSelector: {}
-#        serviceMonitorNamespaceSelector: {}
-#        serviceMonitorSelectorNilUsesHelmValues: false
-#        podMonitorSelector: {}
-#        podMonitorNamespaceSelector: {}
-#        podMonitorSelectorNilUsesHelmValues: false
+        ruleSelector: {}
+        ruleNamespaceSelector: {}
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelectorNilUsesHelmValues: false
         retentionSize: 9GB
         enableAdminAPI: true
         walCompression: true
