@@ -94,8 +94,31 @@ spec:
           targetLabel: kubernetes_node
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+        - action: replace
+          sourceLabels:
+          - node
+          targetLabel: instance
+    kubeApiServer:
+      enabled: true
+    kubeEtcd:
+      enabled: false
+    kubeControllerManager:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
     prometheus-node-exporter:
       fullnameOverride: node-exporter
+      tolerations:
+      - effect: "NoExecute"
+        operator: "Exists"
+      - effect: "NoSchedule"
+        operator: "Exists"
     grafana:
       enabled: false
       forceDeployDashboards: true
@@ -104,11 +127,6 @@ spec:
       configReloaderCpu: 0
     defaultRules:
       create: true
-    kubeStateMetrics:
-      enabled: true
-      serviceMonitor:
-        selfMonitor:
-          enabled: true
     prometheus:
       serviceMonitor:
         selfMonitor: true
