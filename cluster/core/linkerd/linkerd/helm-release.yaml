@@ -30,6 +30,7 @@ spec:
       valuesKey: issuer.key
       targetPath: identity.issuer.tls.keyPEM
   values:
+    webhookFailurePolicy: Fail
     enablePodAntiAffinity: true
     installNamespace: false
     identity:
