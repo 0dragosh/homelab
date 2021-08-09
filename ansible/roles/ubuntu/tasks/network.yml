@@ -11,6 +11,19 @@
     path: /proc/sys/net/bridge/bridge-nf-call-iptables
   register: bridge_nf_call_iptables_result
 
+- name: Disable IPv6
+  ansible.builtin.blockinfile:
+    path: /etc/sysctl.d/99-ipv6-disable.conf
+    mode: 0644
+    create: true
+    block: |
+      net.ipv6.conf.all.disable_ipv6 = 1
+      net.ipv6.conf.default.disable_ipv6 = 1
+      net.ipv6.conf.lo.disable_ipv6 = 1
+  when:
+  - bridge_nf_call_iptables_result.stat.exists
+  register: sysctl_network
+
 - name: Set Kubernetes network configuration
   ansible.builtin.blockinfile:
     path: /etc/sysctl.d/99-kubernetes-cri.conf
@@ -24,7 +37,7 @@
   register: sysctl_network
 
 - name: Reload Kubernetes network configuration
-  ansible.builtin.shell: sysctl -p /etc/sysctl.d/99-kubernetes-cri.conf
+  ansible.builtin.shell: sysctl -p /etc/sysctl.d/99-kubernetes-cri.conf && sysctl -p /etc/sysctl.d/99-ipv6-disable.conf
   when:
   - sysctl_network.changed
   - bridge_nf_call_iptables_result.stat.exists
