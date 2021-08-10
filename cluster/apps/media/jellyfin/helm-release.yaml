@@ -1,0 +1,70 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: jellyfin
+      version: 8.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+  values:
+    image:
+      repository: jellyfin/jellyfin
+      tag: 10.7.6
+    env:
+      TZ: "Europe/Bucharest"
+      JELLYFIN_CACHE_DIR: "/config/cache"
+    podSecurityContext:
+      supplementalGroups:
+      - 44
+      - 109
+      - 100
+      - 568
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: "${SVC_JELLYFIN_ADDR}"
+        externalTrafficPolicy: Local
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+        hosts:
+        - host: "jellyfin.local.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "jellyfin.local.${SECRET_DOMAIN}"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: jellyfin-config-v1
+      media:
+        enabled: true
+        existingClaim: media-nfs
+        mountPath: /media
+      transcode:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+    resources:
+      requests:
+#        gpu.intel.com/i915: 1
+        cpu: 500m
+        memory: 500Mi
+      limits:
+#        gpu.intel.com/i915: 1
+        memory: 8192Mi

@@ -8,6 +8,7 @@ resources:
 - dizquetv
 - nzbget
 - overseerr
+- jellyfin
 # - plex
 - prowlarr
 # - qbittorrent
