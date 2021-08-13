@@ -38,7 +38,6 @@ spec:
           # -- Configure Web interface + API port
           # @default -- See values.yaml
           http:
-            enabled: true
             port: 8443
           # -- Configure Controller port used for device command/control
           # @default -- See values.yaml
@@ -56,7 +55,7 @@ spec:
           # @default -- See values.yaml
           portal-https:
             enabled: false
-            port: 8443
+            port: 8843
             protocol: HTTPS
           # -- Configure Speedtest port (used for UniFi mobile speed test)
           # @default -- See values.yaml
@@ -89,10 +88,19 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+          traefik.ingress.kubernetes.io/service.serversscheme: https
         hosts:
         - host: "unifi.${SECRET_DOMAIN}"
           paths:
-          - path: /
+          - ## Path. Helm template can be passed.
+            path: /
+            ## Ignored if not kubeVersion >= 1.14-0
+            pathType: Prefix
+            service:
+              ## Overrides the service name reference for this path
+              name: main
+              ## Overrides the service port reference for this path
+              port: 8443
         tls:
         - hosts:
           - "unifi.${SECRET_DOMAIN}"
