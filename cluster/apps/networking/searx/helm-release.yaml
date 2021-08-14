@@ -89,3 +89,4 @@ spec:
     persistence:
       config:
         enabled: true
+        existingClaim: searx-config-v1
