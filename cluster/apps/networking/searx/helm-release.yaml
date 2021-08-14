@@ -1,0 +1,91 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: searx
+  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: searx
+      version: 4.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      # -- image repository
+      repository: searx/searx
+      # -- image tag
+      tag: 1.0.0
+      # -- image pull policy
+      pullPolicy: IfNotPresent
+
+    searx:
+      # -- Specify an existing secret that contains the environment variables
+      # required for the application configuration.
+      existingSecret:
+      # -- External URL where the application is reachable
+      baseUrl: "https://searx.${SECRET_DOMAIN}"
+      # -- Generate a random key used by Morty (Privacy aware web content sanitizer proxy as a service).
+      # Example : `openssl rand -base64 24`
+      mortyKey: "${SECRET_SEARX}"
+
+    searxChecker:
+      # -- searx-checker sidecar image repository
+      repository: searx/searx-checker
+      # -- searx-checker sidecar image tag
+      tag: latest
+      # -- searx-checker sidecar image pull policy
+      pullPolicy: Always
+
+    filtron:
+      # -- filtron sidecar image repository
+      repository: dalf/filtron
+      # -- filtron sidecar image tag
+      tag: latest
+      # -- filtron sidecar image pull policy
+      pullPolicy: Always
+
+    morty:
+      # -- morty sidecar image repository
+      repository: dalf/morty
+      # -- morty sidecar image tag
+      tag: latest
+      # -- morty sidecar image pull policy
+      pullPolicy: Always
+
+    caddy:
+      # -- caddy sidecar image repository
+      repository: caddy
+      # -- caddy sidecar image tag
+      tag: 2.2.0-alpine
+      # -- caddy sidecar image pull policy
+      pullPolicy: IfNotPresent
+
+    ingress:
+      main:
+        primary: true
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: "${SECRET_CLOUDFLARE_TUNNEL_ID_1}.cfargotunnel.com"
+        hosts:
+        - host: "searx.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "searx.${SECRET_DOMAIN}"
+
+    # -- Configure persistence settings for the chart under this key.
+    # @default -- See values.yaml
+    persistence:
+      config:
+        enabled: true
