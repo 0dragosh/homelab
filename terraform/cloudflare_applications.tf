@@ -12,6 +12,7 @@ locals {
     "radarr",
     "readarr",
     "resilio",
+    "searx",
     "sonarr",
     "tautulli",
   ]
