@@ -1,6 +1,7 @@
 locals {
   apps = [
     "bazarr",
+    "cockpit",
     "dizque",
     "grafana",
     "hass",
