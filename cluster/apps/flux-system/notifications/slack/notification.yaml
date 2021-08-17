@@ -34,4 +34,5 @@ spec:
   - "Get.*EOF"
   - "waiting.*socket"
   - ".*error: ssh: handshake.*"
+  - ".*error: context deadline exceeded.*"
   suspend: false
