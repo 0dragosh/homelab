@@ -6,7 +6,7 @@ resources:
 - cert-manager
 - kube-system
 - system-upgrade
-- linkerd
+#- linkerd
 - longhorn
 - metallb
 - terraform
