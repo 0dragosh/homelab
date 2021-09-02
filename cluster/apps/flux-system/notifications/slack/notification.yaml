@@ -35,4 +35,5 @@ spec:
   - "waiting.*socket"
   - ".*error: ssh: handshake.*"
   - ".*error: context deadline exceeded.*"
+  - ".*failed to download repository index: failed to fetch.*"
   suspend: false
