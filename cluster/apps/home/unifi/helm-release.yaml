@@ -86,8 +86,8 @@ spec:
         enabled: true
         ingressClassName: "traefik"
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           traefik.ingress.kubernetes.io/service.serversscheme: https
         hosts:
         - host: "unifi.${SECRET_DOMAIN}"
@@ -98,9 +98,9 @@ spec:
             pathType: Prefix
             service:
               ## Overrides the service name reference for this path
-              name: unifi
+              name: main
               ## Overrides the service port reference for this path
-              port: 8443
+              port: portal-https
         tls:
         - hosts:
           - "unifi.${SECRET_DOMAIN}"
