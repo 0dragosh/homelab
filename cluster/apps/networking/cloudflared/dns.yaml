@@ -4,6 +4,8 @@ kind: DNSEndpoint
 metadata:
   name: storage
   namespace: networking
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   endpoints:
   - dnsName: "storage.${SECRET_DOMAIN}"
@@ -15,6 +17,8 @@ spec:
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
   name: k8sapi
   namespace: networking
 spec:
@@ -28,6 +32,8 @@ spec:
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
   name: bastion
   namespace: networking
 spec:
