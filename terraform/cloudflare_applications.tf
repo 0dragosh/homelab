@@ -15,6 +15,7 @@ locals {
     "resilio",
     "searx",
     "sonarr",
+    "storage",
     "tautulli",
   ]
 
