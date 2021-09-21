@@ -54,7 +54,7 @@ spec:
           # -- Configure Captive Portal HTTPS port
           # @default -- See values.yaml
           portal-https:
-            enabled: false
+            enabled: true
             port: 8843
             protocol: HTTPS
           # -- Configure Speedtest port (used for UniFi mobile speed test)
