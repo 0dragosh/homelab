@@ -99,7 +99,7 @@ spec:
             pathType: Prefix
             service:
               ## Overrides the service name reference for this path
-              name: main
+              name: unifi
               ## Overrides the service port reference for this path
               port: 8443
         tls:
