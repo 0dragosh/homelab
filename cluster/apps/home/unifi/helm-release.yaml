@@ -87,6 +87,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           traefik.ingress.kubernetes.io/service.serversscheme: https
         hosts:
