@@ -14,6 +14,6 @@ resources:
 # - qbittorrent
 - radarr
 - readarr
-- resilio
+# - resilio
 - sonarr
 - tautulli
