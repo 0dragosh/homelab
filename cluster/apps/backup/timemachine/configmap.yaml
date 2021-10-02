@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: timemachine-cm
+  namespace: backup
+data:
+  VOLUME_SIZE_LIMIT: "2T"
+  SMB_INHERIT_PERMISSIONS: "yes"
+  TM_UID: "1002"
+  TM_GID: "1002"
+  TM_USERNAME: "timemachine"
+  MIMIC_MODEL: "TimeCapsule8,119"
+  SHARE_NAME: "TimeMachine"
+  SMB_VFS_OBJECTS: "acl_xattr fruit streams_xattr"
