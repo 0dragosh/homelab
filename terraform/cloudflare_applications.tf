@@ -1,7 +1,6 @@
 locals {
   apps = [
     "bazarr",
-    "cockpit",
     "dizque",
     "grafana",
     "hass",
@@ -15,7 +14,7 @@ locals {
     "resilio",
     "searx",
     "sonarr",
-    "storage",
+    # "storage",
     "tautulli",
     "vpn"
   ]
