@@ -35,8 +35,7 @@ spec:
         gatewayInterface: ens1
         allowedIPs:
           - 0.0.0.0/0
-          - 10.0.0.0/8
-          - 192.168.0.0/16
+          - 10.44.0.1/32
       dns:
         upstream:
           - "${SVC_BLOCKY_ADDRESS}"
