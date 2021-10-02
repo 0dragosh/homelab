@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "${STORAGE_ADDRESS}"
-    path: /storage/backups/timeamchine
+    path: /storage/backups/timemachine
   mountOptions:
   - nfsvers=3
   - tcp
