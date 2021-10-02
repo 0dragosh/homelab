@@ -3,7 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    description: LAN timemachine
+    configmap.reloader.stakater.com/reload: "timemachine-cm"
+    secret.reloader.stakater.com/reload: "timemachine-secret"
   creationTimestamp: null
   generation: 1
   labels:
