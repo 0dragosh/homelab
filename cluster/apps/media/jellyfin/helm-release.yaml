@@ -40,6 +40,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
         hosts:
         - host: "jellyfin.local.${SECRET_DOMAIN}"
           paths:
