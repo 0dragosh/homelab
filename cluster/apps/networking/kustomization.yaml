@@ -9,3 +9,4 @@ resources:
 - blocky
 - cloudflared
 - searx
+- wg-access-server

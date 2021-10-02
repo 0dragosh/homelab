@@ -1,0 +1,65 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: wg-access-server
+  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://place1.github.io/wg-access-server
+      chart: wg-access-server
+      version: 0.4.6
+      sourceRef:
+        kind: HelmRepository
+        name: wg-access-server-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    # WEBUI config, user & pw only
+    web:
+      config:
+        adminPassword: "${SECRET_WG_ADMIN_PW}"
+    # wg conf only
+    wireguard:
+      config:
+        privateKey: "${SECRET_WG_PRIVKEY}"
+      service:
+        type: "LoadBalancer"
+        loadBalancerIP: "${SVC_WIREGUARD}"
+    # ConfigMap config.yaml key
+    config:
+      externalHost: "ssh.${SECRET_DOMAIN}"
+      vpn:
+        gatewayInterface: ens1
+        allowedIPs:
+          - 0.0.0.0/0
+          - 10.0.0.0/8
+          - 192.168.0.0/16
+      dns:
+        upstream:
+          - "${SVC_BLOCKY_ADDRESS}"
+    persistence:
+      enabled: true
+
+    ingress:
+      enabled: true
+      hosts: ["vpn.${SECRET_DOMAIN}"]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        external-dns.alpha.kubernetes.io/target: "${SECRET_CLOUDFLARE_TUNNEL_ID_1}.cfargotunnel.com"
+      tls:
+        - hosts: ["vpn.${SECRET_DOMAIN}"]
+          secretName: "tls-wg-access-server"
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - target:
+              kind: Deployment
+              name: wg-access-server
+            patch:
+              - op: add
+                path: "/spec/template/metadata/annotations"
+                value:
+                  configmap.reloader.stakater.com/reload: wg-access-server
