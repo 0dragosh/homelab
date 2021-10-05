@@ -4,7 +4,7 @@ kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
   namespace: monitoring
-  label:
+  labels:
     chart: 18.1.1
 spec:
   interval: 5m
