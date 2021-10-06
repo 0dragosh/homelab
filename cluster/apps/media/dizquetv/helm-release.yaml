@@ -29,7 +29,7 @@ spec:
             port: 8000
       lb:
         type: LoadBalancer
-        loadBalancerIP: 10.250.14.106
+        loadBalancerIP: "${SVC_DIZQUETV_ADDR}"
         ports:
           http:
             port: 8000
