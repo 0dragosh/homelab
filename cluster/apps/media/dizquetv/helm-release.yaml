@@ -50,6 +50,8 @@ spec:
           paths:
           - path: /api
             pathType: Prefix
+          - path: /video
+            pathType: Prefix
         tls:
         - hosts:
           - "dizquetv.${SECRET_DOMAIN}"
