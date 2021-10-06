@@ -72,6 +72,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
         - "alert-manager.local.${SECRET_DOMAIN}"
@@ -139,6 +140,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
         - "prometheus.local.${SECRET_DOMAIN}"
