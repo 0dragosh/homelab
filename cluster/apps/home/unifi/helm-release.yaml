@@ -33,7 +33,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: 10.250.14.117
+        loadBalancerIP: "${SVC_UNIFI_ADDR}"
         ports:
           # -- Configure Web interface + API port
           # @default -- See values.yaml
