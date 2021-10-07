@@ -4,16 +4,13 @@ kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
   namespace: monitoring
-  labels:
-    # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
-    chart: 18.1.1
 spec:
   interval: 5m
   chart:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 19.0.1
+      version: 19.0.2
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
@@ -47,25 +44,29 @@ spec:
                 {{ end }}
               {{ end }}
         route:
-          group_by: ['alertname', 'job']
+          group_by: ["alertname", "job"]
           group_wait: 30s
           group_interval: 5m
           repeat_interval: 6h
-          receiver: 'slack'
+          receiver: "discord"
           routes:
-          - receiver: 'null'
+          - receiver: "null"
             match:
               alertname: Watchdog
-          - receiver: 'slack'
+          - receiver: "discord"
             match_re:
               severity: critical
             continue: true
+          - receiver: "nodered"
+            match:
+              alertname: UPSOnBattery
+            continue: true
         inhibit_rules:
         - source_match:
-            severity: 'critical'
+            severity: "critical"
           target_match:
-            severity: 'warning'
-          equal: ['alertname', 'namespace']
+            severity: "warning"
+          equal: ["alertname", "namespace"]
       ingress:
         enabled: true
         pathType: Prefix
@@ -98,6 +99,16 @@ spec:
           targetLabel: kubernetes_node
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
+    prometheus-node-exporter:
+      fullnameOverride: node-exporter
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          multicluster:
+            etcd:
+              enabled: true
     kubelet:
       enabled: true
       serviceMonitor:
@@ -108,32 +119,14 @@ spec:
           targetLabel: instance
     kubeApiServer:
       enabled: true
-    kubeEtcd:
-      enabled: false
-    kubeControllerManager:
-      enabled: false
-    kubeScheduler:
-      enabled: false
-    kubeProxy:
-      enabled: false
-    prometheus-node-exporter:
-      fullnameOverride: node-exporter
-      tolerations:
-      - effect: "NoExecute"
-        operator: "Exists"
-      - effect: "NoSchedule"
-        operator: "Exists"
-    grafana:
-      enabled: false
-      forceDeployDashboards: true
+      service:
+        enabled: true
+        port: 2381
+        targetPort: 2381
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
       configReloaderCpu: 0
-    defaultRules:
-      create: true
     prometheus:
-      serviceMonitor:
-        selfMonitor: true
       ingress:
         enabled: true
         pathType: Prefix
@@ -148,20 +141,17 @@ spec:
         - hosts:
           - "prometheus.local.${SECRET_DOMAIN}"
       thanosService:
-        enabled: false
+        enabled: true
+      thanosServiceMonitor:
+        enabled: true
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: "replica"
-        ruleSelector: {}
-        ruleNamespaceSelector: {}
         ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
         serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelector: {}
-        podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
-        retentionSize: 9GB
+        probeSelectorNilUsesHelmValues: false
+        retention: 6h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
@@ -171,15 +161,3 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
-#        thanos:
-#          image: quay.io/thanos/thanos:v0.21.1
-#          version: v0.21.1
-#          objectStorageConfig:
-#            name: thanos-objstore
-#            key: objstore.yml
-#        additionalScrapeConfigs:
-#          - job_name: 'node-exporter'
-#            honor_timestamps: true
-#            static_configs:
-#              - targets:
-#                  - ${STORAGE_ADDRESS}:9100
