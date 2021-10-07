@@ -5,5 +5,5 @@ resources:
 - cert-manager
 - external-dns
 - external-snapshotter
-- kube-prometheus-stack
+#- kube-prometheus-stack
 - traefik
