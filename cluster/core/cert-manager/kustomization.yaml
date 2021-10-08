@@ -6,3 +6,4 @@ resources:
 - letsencrypt-production.yaml
 - letsencrypt-staging.yaml
 - secret.enc.yaml
+- prometheus-rule.yaml
