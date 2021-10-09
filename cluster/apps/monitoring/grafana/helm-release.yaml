@@ -90,6 +90,11 @@ spec:
           url: http://loki:3100
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/14127
+        metallb:
+          gnetId: 14127
+          revision: 1
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/13032
         longhorn:
           gnetId: 13032
@@ -118,6 +123,12 @@ spec:
         speedtest:
           gnetId: 13665
           revision: 1
+          datasource: Prometheus
+        blackbox:
+          url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/blackbox.json
+          datasource: Prometheus
+        qbittorrent:
+          url: https://raw.githubusercontent.com/esanchezm/prometheus-qbittorrent-exporter/master/grafana/dashboard.json
           datasource: Prometheus
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json

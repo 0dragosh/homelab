@@ -6,3 +6,4 @@ resources:
 - kustomize-controller
 - notification-controller
 - source-controller
+- prometheus-rule.yaml

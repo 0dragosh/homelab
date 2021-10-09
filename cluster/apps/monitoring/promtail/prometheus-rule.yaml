@@ -1,0 +1,61 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: promtail
+spec:
+  groups:
+    - name: promtail
+      rules:
+        - alert: PromtailAbsent
+          annotations:
+            description: Promtail has disappeared from Prometheus target discovery.
+            summary: Promtail is down.
+          expr: |
+            absent(up{job=~".*promtail.*"} == 1)
+          for: 5m
+          labels:
+            severity: critical
+        - alert: PromtailRequestsErrors
+          annotations:
+            description: Promtail host {{ $labels.host }} is experiencing {{ $value | humanizePercentage }} errors.
+            summary: Promtail request errors.
+          expr: |
+            100 * sum(rate(promtail_request_duration_seconds_count{status_code=~"5..|failed"}[1m])) by (namespace, job, host, instance)
+              /
+            sum(rate(promtail_request_duration_seconds_count[1m])) by (namespace, job, host, instance)
+              > 10
+          for: 15m
+          labels:
+            severity: critical
+        - alert: PromtailRequestLatency
+          annotations:
+            description: Promtail host {{ $labels.host }} is experiencing {{ $value }}s 99th percentile latency.
+            summary: Promtail request high latency.
+          expr: |
+            job_status_code_namespace:promtail_request_duration_seconds:99quantile
+              > 1
+          for: 15m
+          labels:
+            severity: critical
+        - alert: PromtailFileLagging
+          annotations:
+            description: Log file for {{ $labels.instance }} {{ $labels.job }} {{ $labels.path }} has been lagging by more than 1MB for more than 15m.
+            summary: Promtail file lagging.
+          expr: |
+            abs(promtail_file_bytes_total - promtail_read_bytes_total)
+              > 1e6
+          for: 15m
+          labels:
+            severity: warning
+        - alert: PromtailFileMissing
+          annotations:
+            description: Log file for {{ $labels.instance }} {{ $labels.job }} {{ $labels.path }} matches the glob but is not being tailed.
+            summary: Promtail file missing.
+          expr: |
+            promtail_file_bytes_total{path!~".*init.*"} == 0
+              unless
+            promtail_read_bytes_total != 0
+          for: 15m
+          labels:
+            severity: critical

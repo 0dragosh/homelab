@@ -8,6 +8,47 @@ spec:
   groups:
     - name: loki.rules
       rules:
+        - alert: LokiAbsent
+          annotations:
+            description: Loki has disappeared from Prometheus service discovery.
+            summary: Loki is down.
+          expr: |
+            absent(up{job=~".*loki.*"} == 1)
+          for: 5m
+          labels:
+            severity: critical
+        - alert: LokiRequestErrors
+          annotations:
+            description: Loki is experiencing {{ $value | humanizePercentage }} of errors on
+              {{ $labels.job }} {{ $labels.route }}.
+            summary: Loki high error rate.
+          expr: |
+            100 * sum(rate(loki_request_duration_seconds_count{status_code=~"5.."}[1m])) by (namespace, job, route)
+              /
+            sum(rate(loki_request_duration_seconds_count[1m])) by (namespace, job, route)
+              > 10
+          for: 15m
+          labels:
+            severity: critical
+        - alert: LokiRequestPanics
+          annotations:
+            description: Loki is experiencing {{ $value | humanizePercentage }} increase of
+              panics on {{ $labels.job }}.
+            summary: Loki request panics.
+          expr: |
+            sum(increase(loki_panic_total[10m])) by (namespace, job) > 0
+          labels:
+            severity: critical
+        - alert: LokiRequestLatency
+          annotations:
+            description: Loki is experiencing {{ $value }}s 99th percentile latency on
+              {{ $labels.job }} {{ $labels.route }}.
+            summary: Loki request latency.
+          expr: |
+            namespace_job_route:loki_request_duration_seconds:99quantile{route!~"(?i).*tail.*"} > 1
+          for: 15m
+          labels:
+            severity: critical
         - alert: LokiRequestErrors
           annotations:
             message: "{{ $labels.job }} {{ $labels.route }} is experiencing {{ $value | humanizePercentage }} errors."
