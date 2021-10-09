@@ -119,6 +119,10 @@ spec:
         enabled: true
         port: 2381
         targetPort: 2381
+    kubeControllerManager:
+      enabled: false
+    kubeScheduler:
+      enabled: false
     # Setting this option to 0 disabled CPU limits
     prometheusOperator:
       configReloaderCpu: 0
