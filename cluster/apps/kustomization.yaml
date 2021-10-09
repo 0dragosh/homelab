@@ -10,3 +10,4 @@ resources:
 - monitoring
 - networking
 - system-upgrade
+- loki
