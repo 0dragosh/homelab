@@ -4,6 +4,7 @@ locals {
     "dizque",
     "grafana",
     "hass",
+    "hajimari",
     "longhorn",
     "nzbget",
     "plex-requests",
