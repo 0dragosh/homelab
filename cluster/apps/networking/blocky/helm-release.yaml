@@ -27,6 +27,13 @@ spec:
       replicas: 3
     env:
       TZ: "Europe/Bucharest"
+    metrics:
+      enabled: true
+      serviceMonitor:
+        interval: 30s
+        scrapeTimeout: 10s
+      prometheusRule:
+        enabled: true
     service:
       main:
         ports:
