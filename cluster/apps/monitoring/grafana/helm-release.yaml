@@ -90,6 +90,11 @@ spec:
           url: http://loki:3100
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/13032
+        longhorn:
+          gnetId: 13032
+          revision: 0
+          datasource: Prometheus
         unifi-client-insights:
           gnetId: 11315
           revision: 8
