@@ -26,7 +26,9 @@ spec:
         external-dns.alpha.kubernetes.io/target: "traefik.${SECRET_DOMAIN}"
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       hosts:
-      - "loki.local.${SECRET_DOMAIN}"
+        - host: "loki.local.${SECRET_DOMAIN}"
+          paths:
+            - /
       tls:
       - hosts:
         - "loki.local.${SECRET_DOMAIN}"
