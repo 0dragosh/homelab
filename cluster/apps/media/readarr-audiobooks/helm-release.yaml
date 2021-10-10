@@ -1,0 +1,75 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: readarr-audiobooks
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: readarr
+      version: 6.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/readarr
+      tag: v0.1.0.989
+    env:
+      TZ: "Europe/Bucharest"
+    ingress:
+      main:
+        primary: true
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: "${SECRET_CLOUDFLARE_TUNNEL_ID_1}.cfargotunnel.com"
+        hosts:
+        - host: "readarr-audiobooks.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "readarr-audiobooks.${SECRET_DOMAIN}"
+    podSecurityContext:
+      fsGroup: 568
+    persistence:
+      config:
+        enabled: true
+        existingClaim: readarr-audiobooks-config-v3
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${STORAGE_ADDRESS}"
+            path: /storage/media/audiobooks
+        mountPath: /media/audiobooks
+        readOnly: false
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${STORAGE_ADDRESS}"
+            path: /storage/backups/softwarrself
+        mountPath: /config/Backups
+        readOnly: false
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 500m
+      limits:
+        memory: 1500Mi
+    prometheus:
+      podMonitor:
+        enabled: true
+        interval: 10m
+        scrapeTimeout: 2m

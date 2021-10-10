@@ -18,6 +18,7 @@ locals {
     "qbittorrent",
     "radarr",
     "readarr",
+    "readarr-audiobooks",
     "resilio",
     "searx",
     "sonarr",
