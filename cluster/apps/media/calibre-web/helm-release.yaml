@@ -37,9 +37,9 @@ spec:
         volumeSpec:
           nfs:
             server: "${STORAGE_ADDRESS}"
-            path: /storage/media/books
+            path: /storage/media/ebooks
         mountPath: /books
-        readOnly: true
+        readOnly: false
     ingress:
       main:
         enabled: true
