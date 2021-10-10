@@ -37,6 +37,7 @@ spec:
         ports:
           http:
             port: 80
+    initContainers:
     ingress:
       main:
         enabled: true
