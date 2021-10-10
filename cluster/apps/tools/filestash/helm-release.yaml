@@ -19,6 +19,10 @@ spec:
       repository: machines/filestash
       tag: latest@sha256:85b32a4092c6bac1551bbde6b03ef832bdb65f368a4608539a14f2388ad2ec37
     nameOverride: filestash
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
     env:
       APPLICATION_URL: "https://filestash.${SECRET_DOMAIN}"
       TZ: "Europe/Bucharest"
