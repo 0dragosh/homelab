@@ -27,10 +27,18 @@ spec:
       config:
         enabled: true
         existingClaim: calibre-web-config
+      library:
+        enabled: true
+        existingClaim: calibre-library
+        mountPath: /library
       media:
         enabled: true
-        existingClaim: media-nfs
-        mountPath: /data/nas-media
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${STORAGE_ADDRESS}"
+            path: /storage/media/books
+        mountPath: /books
     ingress:
       main:
         enabled: true
