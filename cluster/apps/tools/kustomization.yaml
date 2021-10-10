@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   - changedetection-io
   - filebrowser
-  - filestash
   - minio
