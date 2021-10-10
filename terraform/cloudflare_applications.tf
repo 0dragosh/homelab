@@ -1,6 +1,8 @@
 locals {
   apps = [
     "bazarr",
+    "calibre",
+    "calibre-web",
     "dizque",
     "filebrowser",
     "filestash",

@@ -17,3 +17,5 @@ resources:
 # - resilio
 - sonarr
 - tautulli
+- calibre
+- calibre-web
