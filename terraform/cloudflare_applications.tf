@@ -2,6 +2,9 @@ locals {
   apps = [
     "bazarr",
     "dizque",
+    "filebrowser",
+    "filestash",
+    "change-detection",
     "grafana",
     "hass",
     "hajimari",
