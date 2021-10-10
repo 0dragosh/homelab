@@ -39,6 +39,7 @@ spec:
             server: "${STORAGE_ADDRESS}"
             path: /storage/media/books
         mountPath: /books
+        readOnly: true
     ingress:
       main:
         enabled: true
