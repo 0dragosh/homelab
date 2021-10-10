@@ -1,0 +1,37 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: thanos-store.rules
+spec:
+  groups:
+    - name: thanos-store.rules
+      rules:
+        - expr: |
+            (
+              sum by (job) (rate(grpc_server_handled_total{grpc_code=~"Unknown|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-store.*", grpc_type="unary"}[5m]))
+            /
+              sum by (job) (rate(grpc_server_started_total{job=~".*thanos-store.*", grpc_type="unary"}[5m]))
+            )
+          record: :grpc_server_failures_per_unary:sum_rate
+        - expr: |
+            (
+              sum by (job) (rate(grpc_server_handled_total{grpc_code=~"Unknown|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-store.*", grpc_type="server_stream"}[5m]))
+            /
+              sum by (job) (rate(grpc_server_started_total{job=~".*thanos-store.*", grpc_type="server_stream"}[5m]))
+            )
+          record: :grpc_server_failures_per_stream:sum_rate
+        - expr: |
+            (
+              sum by (job) (rate(thanos_objstore_bucket_operation_failures_total{job=~".*thanos-store.*"}[5m]))
+            /
+              sum by (job) (rate(thanos_objstore_bucket_operations_total{job=~".*thanos-store.*"}[5m]))
+            )
+          record: :thanos_objstore_bucket_failures_per_operation:sum_rate
+        - expr: |
+            histogram_quantile(0.99,
+              sum by (job, le) (rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=~".*thanos-store.*"}[5m]))
+            )
+          labels:
+            quantile: "0.99"
+          record: :thanos_objstore_bucket_operation_duration_seconds:histogram_quantile

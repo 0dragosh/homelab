@@ -1,0 +1,44 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: thanos-query.rules
+spec:
+  groups:
+    - name: thanos-query.rules
+      rules:
+        - expr: |
+            (
+              sum by (job) (rate(grpc_client_handled_total{grpc_code=~"Unknown|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-query.*", grpc_type="unary"}[5m]))
+            /
+              sum by (job) (rate(grpc_client_started_total{job=~".*thanos-query.*", grpc_type="unary"}[5m]))
+            )
+          record: :grpc_client_failures_per_unary:sum_rate
+        - expr: |
+            (
+              sum by (job) (rate(grpc_client_handled_total{grpc_code=~"Unknown|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-query.*", grpc_type="server_stream"}[5m]))
+            /
+              sum by (job) (rate(grpc_client_started_total{job=~".*thanos-query.*", grpc_type="server_stream"}[5m]))
+            )
+          record: :grpc_client_failures_per_stream:sum_rate
+        - expr: |
+            (
+              sum by (job) (rate(thanos_query_store_apis_dns_failures_total{job=~".*thanos-query.*"}[5m]))
+            /
+              sum by (job) (rate(thanos_query_store_apis_dns_lookups_total{job=~".*thanos-query.*"}[5m]))
+            )
+          record: :thanos_query_store_apis_dns_failures_per_lookup:sum_rate
+        - expr: |
+            histogram_quantile(0.99,
+              sum by (job, le) (rate(http_request_duration_seconds_bucket{job=~".*thanos-query.*", handler="query"}[5m]))
+            )
+          labels:
+            quantile: "0.99"
+          record: :query_duration_seconds:histogram_quantile
+        - expr: |
+            histogram_quantile(0.99,
+              sum by (job, le) (rate(http_request_duration_seconds_bucket{job=~".*thanos-query.*", handler="query_range"}[5m]))
+            )
+          labels:
+            quantile: "0.99"
+          record: :api_range_query_duration_seconds:histogram_quantile

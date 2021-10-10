@@ -1,0 +1,82 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: thanos-store
+spec:
+  groups:
+    - name: thanos-store
+      rules:
+        - alert: ThanosStoreIsDown
+          annotations:
+            description: ThanosStore has disappeared. Prometheus target for the component
+              cannot be discovered.
+            runbook_url: https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanosstoreisdown
+            summary: Thanos component has disappeared.
+          expr: |
+            absent(up{job=~".*thanos-store.*"} == 1)
+          for: 5m
+          labels:
+            severity: critical
+        - alert: ThanosStoreGrpcErrorRate
+          annotations:
+            description: Thanos Store {{$labels.job}} is failing to handle {{$value | humanize}}%
+              of requests.
+            runbook_url: https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanosstoregrpcerrorrate
+            summary: Thanos Store is failing to handle qrpcd requests.
+          expr: |
+            (
+              sum by (job) (rate(grpc_server_handled_total{grpc_code=~"Unknown|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded", job=~".*thanos-store.*"}[5m]))
+            /
+              sum by (job) (rate(grpc_server_started_total{job=~".*thanos-store.*"}[5m]))
+            * 100 > 5
+            )
+          for: 5m
+          labels:
+            severity: warning
+        - alert: ThanosStoreSeriesGateLatencyHigh
+          annotations:
+            description: Thanos Store {{$labels.job}} has a 99th percentile latency of {{$value}}
+              seconds for store series gate requests.
+            runbook_url: https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanosstoreseriesgatelatencyhigh
+            summary: Thanos Store has high latency for store series gate requests.
+          expr: |
+            (
+              histogram_quantile(0.99, sum by (job, le) (rate(thanos_bucket_store_series_gate_duration_seconds_bucket{job=~".*thanos-store.*"}[5m]))) > 2
+            and
+              sum by (job) (rate(thanos_bucket_store_series_gate_duration_seconds_count{job=~".*thanos-store.*"}[5m])) > 0
+            )
+          for: 10m
+          labels:
+            severity: warning
+        - alert: ThanosStoreBucketHighOperationFailures
+          annotations:
+            description: Thanos Store {{$labels.job}} Bucket is failing to execute {{$value
+              | humanize}}% of operations.
+            runbook_url: https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanosstorebuckethighoperationfailures
+            summary: Thanos Store Bucket is failing to execute operations.
+          expr: |
+            (
+              sum by (job) (rate(thanos_objstore_bucket_operation_failures_total{job=~".*thanos-store.*"}[5m]))
+            /
+              sum by (job) (rate(thanos_objstore_bucket_operations_total{job=~".*thanos-store.*"}[5m]))
+            * 100 > 5
+            )
+          for: 15m
+          labels:
+            severity: warning
+        - alert: ThanosStoreObjstoreOperationLatencyHigh
+          annotations:
+            description: Thanos Store {{$labels.job}} Bucket has a 99th percentile latency
+              of {{$value}} seconds for the bucket operations.
+            runbook_url: https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanosstoreobjstoreoperationlatencyhigh
+            summary: Thanos Store is having high latency for bucket operations.
+          expr: |
+            (
+              histogram_quantile(0.99, sum by (job, le) (rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=~".*thanos-store.*"}[5m]))) > 2
+            and
+              sum by (job) (rate(thanos_objstore_bucket_operation_duration_seconds_count{job=~".*thanos-store.*"}[5m])) > 0
+            )
+          for: 10m
+          labels:
+            severity: warning

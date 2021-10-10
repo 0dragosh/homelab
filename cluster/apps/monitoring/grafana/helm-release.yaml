@@ -90,6 +90,11 @@ spec:
           url: http://loki:3100
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/13502
+        minio:
+          gnetId: 13502
+          revision: 10
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/14127
         metallb:
           gnetId: 14127
