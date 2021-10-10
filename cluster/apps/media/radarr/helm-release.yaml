@@ -48,6 +48,15 @@ spec:
         enabled: true
         existingClaim: media-nfs
         mountPath: /media
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${STORAGE_ADDRESS}"
+            path: /storage/backups/softwarrself
+        mountPath: /config/Backups
+        readOnly: false
     resources:
       requests:
         memory: 250Mi
