@@ -13,4 +13,4 @@ resources:
 - networking.yaml
 - backup.yaml
 - linkerd.yaml
-- terraform.yaml
+- tools.yaml
