@@ -9,6 +9,7 @@ locals {
     "hass",
     "hajimari",
     "longhorn",
+    "minio",
     "nzbget",
     "plex-requests",
     "prowlarr",
