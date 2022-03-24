@@ -1,0 +1,82 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: zigbee2mqtt
+  namespace: home
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: zigbee2mqtt
+      version: 9.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+  dependsOn:
+    - name: mosquitto
+      namespace: home
+  values:
+    image:
+      repository: ghcr.io/koenkk/zigbee2mqtt
+      tag: 1.23.0
+    env:
+      TZ: "${TZ}"
+      ZIGBEE2MQTT_DATA: /data
+    ingress:
+      main:
+        enabled: true
+        primary: true
+        ingressClassName: "traefik"
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: "${SECRET_CLOUDFLARE_TUNNEL_ID_1}.cfargotunnel.com"
+        hosts:
+          - host: "zigbee2mqtt.${SECRET_DOMAIN_CASA}"
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: "zigbee2mqtt.${SECRET_DOMAIN_CASA}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "zigbee2mqtt.${SECRET_DOMAIN_CASA}"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: zigbee2mqtt-config-v2
+        mountPath: "/data"
+    resources:
+      requests:
+        memory: 100Mi
+        cpu: 100m
+      limits:
+        memory: 500Mi
+    # These config values are not what is my current state of zigbee2mqtt
+    # It's merely a guide for the initial start up on a fresh install
+    # Everything after the first start is managed in the UI
+    config:
+      homeassistant: true
+      device_options:
+        retain: true
+      permit_join: false
+      mqtt:
+        base_topic: zigbee2mqtt
+        server: "mqtt://mosquitto"
+        user: "${SECRET_MQTT_USERNAME}"
+        password: "${SECRET_MQTT_PASSWORD}"
+      serial:
+        port: "tcp://192.168.1.90:6638"
+      advanced:
+        log_output:
+          - console
+        network_key: GENERATE
+        pan_id: GENERATE
+      frontend:
+        port: 8080
