@@ -202,7 +202,7 @@ spec:
                 requests:
                   storage: 20Gi
         thanos:
-          image: quay.io/thanos/thanos:v0.24.0
+          image: quay.io/thanos/thanos:v0.25.2
           version: v0.22.0
           objectStorageConfig:
             name: thanos-objstore
