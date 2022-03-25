@@ -72,6 +72,8 @@ cameras:
         - /dev/dri/renderD128
         - -hwaccel_output_format
         - yuv420p
+      output_args:
+        record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac # enables audio
       input_args:
         - -avoid_negative_ts
         - make_zero
@@ -93,7 +95,7 @@ cameras:
             - clips
             - detect
             - record
-    #       - path: rtmp://10.10.11.45/bcs/channel0_sub.bcs?channel=0&stream=0&user=admin&password=password
+    #       - path: rtmp://${CAM1_IP}/bcs/channel0_sub.bcs?channel=0&stream=0&user=${CAM1_USER}&password=${CAM1_PASSWORD}
     #         roles:
     #           - detect
     width: 2560
@@ -106,7 +108,7 @@ cameras:
         - dog
     snapshots:
       enabled: true
-      timestamp: true
+      timestamp: false
       bounding_box: true
       retain:
         default: 10
@@ -118,7 +120,13 @@ cameras:
         default: 10
     record:
       enabled: true
-      retain_days: 10
+      retain:
+        days: 10
+        mode: motion
+      events:
+        retain:
+          default: 10
+          mode: active_objects
   detectors:
     cpu1:
       type: cpu
