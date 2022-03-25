@@ -200,6 +200,26 @@ locals {
       type      = "self_hosted"
       gsuite    = true
     },
+    {
+      subdomain = "zigbee2mqtt"
+      type      = "self_hosted"
+      gsuite    = true
+    },
+    {
+      subdomain = "nodered"
+      type      = "self_hosted"
+      gsuite    = true
+    },
+    {
+      subdomain = "mosquitto"
+      type      = "self_hosted"
+      gsuite    = true
+    },
+    {
+      subdomain = "frigate"
+      type      = "self_hosted"
+      gsuite    = true
+    },
   ]
   apps_secondary = [
     {

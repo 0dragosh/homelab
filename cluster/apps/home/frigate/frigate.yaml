@@ -1,0 +1,130 @@
+---
+logger:
+  default: info
+  logs:
+    frigate.record: debug
+
+mqtt:
+  host: mosquitto
+  topic_prefix: frigate
+  user: "${SECRET_MQTT_USERNAME}"
+  password: "${SECRET_MQTT_PASSWORD}"
+
+database:
+  path: /data/frigate.db
+
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
+
+objects:
+  track:
+    - person
+  filters:
+    person:
+      min_area: 2500
+      max_area: 100000
+      threshold: 0.7
+
+ffmpeg:
+  hwaccel_args:
+    - -hwaccel
+    - vaapi
+    - -hwaccel_device
+    - /dev/dri/renderD128
+    - -hwaccel_output_format
+    - yuv420p
+  # Enable audio on recordings...
+  # might cause issues on recording playback
+  # output_args:
+  #   record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac
+
+rtmp:
+  enabled: true
+
+snapshots:
+  enabled: true
+  timestamp: false
+  bounding_box: true
+  retain:
+    default: 7
+
+record:
+  enabled: true
+  retain:
+    days: 2
+    mode: motion
+  events:
+    retain:
+      default: 5
+      mode: active_objects
+
+cameras:
+  front_camera_frigate:
+    rtmp:
+      enabled: false
+    ffmpeg:
+      hwaccel_args:
+        - -hwaccel
+        - vaapi
+        - -hwaccel_device
+        - /dev/dri/renderD128
+        - -hwaccel_output_format
+        - yuv420p
+      input_args:
+        - -avoid_negative_ts
+        - make_zero
+      #   - -fflags
+      #   - nobuffer
+      #   - -flags
+      #   - low_delay
+      #   - -strict
+      #   - experimental
+      #   - -fflags
+      #   - +genpts+discardcorrupt
+      #   - -rw_timeout
+      #   - "5000000"
+      #   - -use_wallclock_as_timestamps
+      #   - "1"
+      inputs:
+        - path: rtmp://${CAM1_IP}/bcs/channel0_main.bcs?channel=0&stream=0&user=${CAM1_USER}&password=${CAM1_PASSWORD}
+          roles:
+            - clips
+            - detect
+            - record
+    #       - path: rtmp://10.10.11.45/bcs/channel0_sub.bcs?channel=0&stream=0&user=admin&password=password
+    #         roles:
+    #           - detect
+    width: 2560
+    height: 1920
+    fps: 25
+    objects:
+      track:
+        - person
+        - car
+        - dog
+    snapshots:
+      enabled: true
+      timestamp: true
+      bounding_box: true
+      retain:
+        default: 10
+    clips:
+      enabled: true
+      pre_capture: 10
+      post_capture: 10
+      retain:
+        default: 10
+    record:
+      enabled: true
+      retain_days: 10
+  detectors:
+    cpu1:
+      type: cpu
+    cpu2:
+      type: cpu
+    cpu3:
+      type: cpu
+    cpu4:
+      type: cpu

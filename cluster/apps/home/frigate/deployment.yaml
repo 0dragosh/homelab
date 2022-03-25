@@ -1,0 +1,94 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app frigate
+  namespace: home
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        configmap.reloader.stakater.com/reload: frigate-config
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: *app
+          image: docker.io/blakeblackshear/frigate:0.10.1-amd64
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: "${TZ}"
+          securityContext:
+            privileged: true
+          ports:
+            - name: &port http
+              containerPort: 5000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/version
+              port: *port
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/version
+              port: *port
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /api/version
+              port: *port
+            failureThreshold: 30
+            periodSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: config
+              mountPath: /config/config.yml
+              subPath: frigate.yaml
+            - name: media
+              mountPath: /media
+            - name: cache
+              mountPath: /dev/shm
+          resources:
+            requests:
+              cpu: 500m
+              memory: 100Mi
+              gpu.intel.com/i915: "1"
+            limits:
+              cpu: 8000m
+              memory: 16000Mi
+              gpu.intel.com/i915: "1"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: frigate-config-v2
+        - name: config
+          configMap:
+            name: frigate-config
+        - name: media
+          nfs:
+            server: "${TRUENAS_ADDRESS}"
+            path: /mnt/storage/frigate
+        - name: cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: 4Gi
+

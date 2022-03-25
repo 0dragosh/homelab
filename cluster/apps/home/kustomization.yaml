@@ -7,3 +7,4 @@ resources:
   - mosquitto
   - zigbee2mqtt
   - node-red
+  - frigate
