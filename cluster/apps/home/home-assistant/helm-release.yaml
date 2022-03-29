@@ -21,7 +21,7 @@ spec:
       kubernetes.io/hostname: nuc1
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2022.3.7
+      tag: 2022.3.8
     env:
       TZ: "${TZ}"
     hostNetwork: true
