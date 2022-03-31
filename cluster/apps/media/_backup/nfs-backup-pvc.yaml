@@ -11,7 +11,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: "${TRUENAS_ADDRESS}"
+    server: "${TRUENAS_VM_ADDRESS}"
     path: /mnt/nvme/backups/pvc
 #  mountOptions:
 #    - nfsvers=4.2

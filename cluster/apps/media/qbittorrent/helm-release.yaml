@@ -96,14 +96,14 @@ spec:
             server: "${TRUENAS_ADDRESS}"
             path: /mnt/nvme/media
         mountPath: /media-temp
-#      media:
-#        enabled: true
-#        type: custom
-#        volumeSpec:
-#          nfs:
-#            server: "${TRUENAS_ADDRESS}"
-#            path: /mnt/storage/media
-#        mountPath: /media
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${TRUENAS_VM_ADDRESS}"
+            path: /mnt/storage/media
+        mountPath: /media
     resources:
       requests:
         memory: 250Mi

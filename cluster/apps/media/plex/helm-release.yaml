@@ -59,7 +59,7 @@ spec:
 #        type: custom
 #        volumeSpec:
 #          nfs:
-#            server: "${TRUENAS_ADDRESS}"
+#            server: "${TRUENAS_VM_ADDRESS}"
 #            path: /mnt/storage/media
 #        mountPath: /data
 #        readOnly: false
@@ -80,7 +80,7 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            server: "${TRUENAS_ADDRESS}"
+            server: "${TRUENAS_VM_ADDRESS}"
             path: /mnt/nvme/backups/softwarrself/plex
         mountPath: /config/backup
         readOnly: false

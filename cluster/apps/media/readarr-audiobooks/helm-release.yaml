@@ -57,7 +57,7 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            server: "${TRUENAS_ADDRESS}"
+            server: "${TRUENAS_VM_ADDRESS}"
             path: /mnt/storage/media/audiobooks
         mountPath: /media/audiobooks
       nzbget-downloads:
@@ -65,7 +65,7 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            server: "${TRUENAS_ADDRESS}"
+            server: "${TRUENAS_VM_ADDRESS}"
             path: /mnt/nvme/nzbget-downloads
         mountPath: /nzbget-downloads
       backup:
@@ -73,7 +73,7 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            server: "${TRUENAS_ADDRESS}"
+            server: "${TRUENAS_VM_ADDRESS}"
             path: /mnt/nvme/backups/softwarrself/readarr-audiobooks
         mountPath: /config/Backups
         readOnly: false

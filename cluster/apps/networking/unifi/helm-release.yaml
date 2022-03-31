@@ -144,7 +144,7 @@ spec:
         type: custom
         volumeSpec:
           nfs:
-            server: "${TRUENAS_ADDRESS}"
+            server: "${TRUENAS_VM_ADDRESS}"
             path: /mnt/nvme/backups/softwarrself/unifi
         mountPath: /unifi/data/backup/autobackup
         readOnly: false

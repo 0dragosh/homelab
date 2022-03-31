@@ -85,7 +85,7 @@ spec:
             name: frigate-config
         - name: media
           nfs:
-            server: "${TRUENAS_ADDRESS}"
+            server: "${TRUENAS_VM_ADDRESS}"
             path: /mnt/storage/frigate
         - name: cache
           emptyDir:

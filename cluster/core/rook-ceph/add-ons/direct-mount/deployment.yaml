@@ -72,7 +72,7 @@ spec:
                 path: mon-endpoints
         - name: nas-backup
           nfs:
-            server: "${TRUENAS_ADDRESS}"
+            server: "${TRUENAS_VM_ADDRESS}"
             path: /mnt/nvme/backups/pvc
         - name: direct-mount-scripts
           projected:
