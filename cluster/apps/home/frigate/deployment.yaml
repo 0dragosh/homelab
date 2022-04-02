@@ -86,7 +86,7 @@ spec:
         - name: media
           nfs:
             server: "${TRUENAS_VM_ADDRESS}"
-            path: /mnt/storage/frigate
+            path: /mnt/tank/frigate
         - name: cache
           emptyDir:
             medium: Memory

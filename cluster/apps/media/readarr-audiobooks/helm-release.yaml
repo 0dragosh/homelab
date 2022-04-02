@@ -58,7 +58,7 @@ spec:
         volumeSpec:
           nfs:
             server: "${TRUENAS_VM_ADDRESS}"
-            path: /mnt/storage/media/audiobooks
+            path: /mnt/tank/media/audiobooks
         mountPath: /media/audiobooks
       nzbget-downloads:
         enabled: true

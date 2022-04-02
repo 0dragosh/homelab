@@ -49,7 +49,7 @@ spec:
         volumeSpec:
           nfs:
             server: "${TRUENAS_VM_ADDRESS}"
-            path: /mnt/storage/media/comics
+            path: /mnt/tank/media/comics
         mountPath: /media/comics
       nzbget-downloads:
         enabled: true

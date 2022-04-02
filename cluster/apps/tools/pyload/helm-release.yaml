@@ -56,7 +56,7 @@ spec:
         volumeSpec:
           nfs:
             server: "${TRUENAS_VM_ADDRESS}"
-            path: /mnt/storage/media/misc
+            path: /mnt/tank/media/misc
         mountPath: /downloads
         # accessModes:
         #   - ReadWriteOnce
