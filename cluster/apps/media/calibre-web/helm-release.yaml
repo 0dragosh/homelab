@@ -25,7 +25,7 @@ spec:
 
     image:
       repository: ghcr.io/linuxserver/calibre-web
-      tag: 0.6.17
+      tag: 0.6.18
 
     podAnnotations:
       backup.velero.io/backup-volumes: config
