@@ -1,0 +1,121 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plex-media-manager
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: /charts/kah-common/
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: meisnate12/plex-meta-manager
+      tag: v1.16.3-ls10
+    nameOverride: plex-media-manager
+    env:
+      TZ: ${TZ}
+      PMM_TIME: "06:00"
+      PMM_RUN: "True"
+    persistance:
+      config:
+        type: configMap
+        mountPath: /config
+    configmap:
+      config:
+        enabled: true
+        data:
+          config.yaml: |
+            libraries:
+              Movies:
+                metadata_path:
+                  - file: config/Movies.yml
+                  - git: meisnate12/MovieCharts
+                  - git: meisnate12/Studios
+                  - git: meisnate12/IMDBGenres
+                  - git: meisnate12/People
+              TV shows:
+                metadata_path:
+                  - file: config/TV Shows.yml
+                  - git: meisnate12/ShowCharts
+                  - git: meisnate12/Networks
+              Anime Movies:
+                metadata_path:
+                  - file: config/Anime TV.yml
+                  - git: meisnate12/AnimeCharts
+            settings:
+              cache: true
+              cache_expiration: 60
+              asset_directory: config/assets
+              asset_folders: true
+              assets_for_all: false
+              sync_mode: append
+              show_unmanaged: true
+              show_filtered: false
+              show_missing: true
+              save_missing: true
+              run_again_delay: 2
+              missing_only_released: false
+              create_asset_folders: false
+              collection_minimum: 1
+              delete_below_minimum: false
+              tvdb_language: default
+              show_missing_assets: true
+            plex:
+              url: http://plex.media:32400
+              token: ${SECRET_PLEX_TOKEN}
+              timeout: 60
+              clean_bundles: false
+              empty_trash: false
+              optimize: false
+            tmdb:
+              apikey: ${SECRET_TMDB_API_KEY}
+              language: en
+            tautulli:
+              url: http://tautulli.media:8181
+              apikey: ${SECRET_TAUTULLI_API_KEY}
+            radarr:
+              url: http://radarr.media:7878
+              token: ${SECRET_RADARR_API_KEY}
+              root_folder_path: /media/movies
+              monitor: true
+              availability: announced
+              quality_profile: (U)HD - 720p/1080p/2160p
+              version: v3
+              add: false
+              tag:
+              search: false
+              add_existing: false
+            sonarr:
+              url: http://sonarr.media:8989
+              token: ${SECRET_SONARR_API_KEY}
+              version: v3
+              add: false
+              root_folder_path: /media/tv
+              monitor: all
+              quality_profile: (U)HD - 720p/1080p/2160p
+              language_profile: English
+              series_type: standard
+              season_folder: true
+              tag:
+              search: false
+              cutoff_search: false
+              add_existing: false
+            trakt:
+              client_id: ${SECRET_TRAKT_PMM_CLIENT_ID}
+              client_secret: ${SECRET_TRAKT_PMM_CLIENT_SECRET}
+    podAnnotations:
+      secret.reloader.stakater.com/reload: "plex-media-manager"
+    resources:
+      requests:
+        memory: 100Mi
+        cpu: 100m
+      limits:
+        memory: 2Gi
+        cpu: 1
