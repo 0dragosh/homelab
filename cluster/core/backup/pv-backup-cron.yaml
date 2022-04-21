@@ -20,7 +20,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: pv-backup
-              image: ghcr.io/k8s-at-home/kubectl:v1.23.5
+              image: ghcr.io/k8s-at-home/kubectl:v1.23.6
               command:
                 - "/bin/sh"
               args:
