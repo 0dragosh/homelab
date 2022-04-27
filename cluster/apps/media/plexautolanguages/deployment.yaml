@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: plexautolanguages
-          image: remirigal/plex-auto-languages:v1.0.10
+          image: remirigal/plex-auto-languages:v1.0.11
           imagePullPolicy: IfNotPresent
           resources:
             requests:
