@@ -50,6 +50,8 @@ cameras:
   int:
     ffmpeg:
       hwaccel_args:
+        - -c:v
+        - h264_qsv
         - -hwaccel
         - qsv
         - -qsv_device
@@ -57,6 +59,7 @@ cameras:
       global_args: -hide_banner -loglevel info
       output_args:
         record: -f segment -segment_time 60 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c copy #removed -an parameter to enable audio
+        detect: -f rawvideo -vf hwdownload,format=nv12 -pix_fmt yuv420p
       input_args:
         - -avoid_negative_ts
         - make_zero
