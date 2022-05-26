@@ -15,7 +15,7 @@ spec:
             runAsGroup: 1000
           containers:
             - name: plex-media-manager
-              image: meisnate12/plex-meta-manager:v1.16.5
+              image: meisnate12/plex-meta-manager:v1.17.0
               imagePullPolicy: IfNotPresent
               args: ["--run", "--read-only-config"]
               env:
