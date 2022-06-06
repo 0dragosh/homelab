@@ -24,7 +24,7 @@ control_plane_cluster_configuration = {
   network = {
       cni = {
           name = "custom"
-          urls = ["https://raw.githubusercontent.com/0dragosh/homelab-k3s/restructuring-talos/k8s/clusters/homelab-talos-0/integrations/cilium-quick-install/quick-install.yaml"]
+          urls = ["https://raw.githubusercontent.com/0dragosh/homelab/restructuring-talos/k8s/clusters/homelab-talos-0/integrations/cilium-quick-install/quick-install.yaml"]
       }
       dnsDomain = "cluster.local"
       podSubnets = ["10.244.0.0/16"]
