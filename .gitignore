@@ -21,3 +21,4 @@ node_modules
 .decrypted~*.yaml
 .dec~*.yaml
 kubeconfig
+.terraform
