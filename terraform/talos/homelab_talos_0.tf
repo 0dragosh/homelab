@@ -1,5 +1,5 @@
 module "homelab-talos-0" {
-  source = "github.com/ilpozzd/terraform-talos-vsphere-cluster?ref=v1.1.2"
+  source = "github.com/ilpozzd/terraform-talos-vsphere-cluster?ref=v1.1.3"
 
   cluster_name = "homelab-talos-0"
   datacenter = "Datacenter"
