@@ -36,7 +36,7 @@ spec:
           memory: 3000Mi
     initContainers:
       - name: velero-plugin-for-aws
-        image: velero/velero-plugin-for-aws:v1.3.0
+        image: velero/velero-plugin-for-aws:v1.3.1
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
