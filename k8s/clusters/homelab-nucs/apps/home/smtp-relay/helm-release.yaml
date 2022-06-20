@@ -32,7 +32,7 @@ spec:
       SERVER_HOSTNAME: "${SECRET_DOMAIN}"
     image:
       repository: docker.io/juanluisbaptiste/postfix
-      tag: 1.5.1
+      tag: 1.6.0
     service:
       main:
         type: LoadBalancer
