@@ -21,7 +21,7 @@ spec:
     #   kubernetes.io/hostname: nuc1
     image:
       repository: ghcr.io/onedr0p/home-assistant
-      tag: 2022.7.2
+      tag: 2022.7.3
     env:
       TZ: "${TZ}"
       PYTHONUSERBASE: /config/deps
