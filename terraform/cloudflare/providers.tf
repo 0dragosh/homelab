@@ -2,7 +2,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 3.18.0"
+      version = "~> 3.19.0"
     }
     random     = {
       version = "~> 3.3.0"
