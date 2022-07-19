@@ -126,7 +126,7 @@ spec:
         enabled: false
         image:
           repository: docker.io/codercom/code-server
-          tag: 4.4.0
+          tag: 4.5.1
         env:
           TZ: "${TZ}"
         git:
