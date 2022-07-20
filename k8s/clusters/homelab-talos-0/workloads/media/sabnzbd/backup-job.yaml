@@ -15,7 +15,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: backup
-              image: ghcr.io/onedr0p/rclone:1.58.1@sha256:6c1c3613c754c96140258e84d007eeeead6195b025223b7d8ba50fbd459b8e2a
+              image: ghcr.io/onedr0p/rclone:1.58.1@sha256:23442b3c125fd125f8dcd9ac4b2c80d426e4f84851a864ad8f14dc942c8c1b84
               command:
                 - /bin/sh
                 - -c
